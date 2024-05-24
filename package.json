@@ -1,0 +1,17 @@
+{
+  "name": "micro-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "setup": "pnpm --filter ./* install",
+    "dev": "pnpm --parallel --filter ./fe-* bw & sleep 10 && pnpm --parallel --filter ./fe-* preview",
+    "build": "pnpm --parallel --filter ./fe-* bw",
+    "preview": "pnpm --parallel --filter ./fe-* preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "vue-i18n-lite": "^1.0.2"
+  }
+}
