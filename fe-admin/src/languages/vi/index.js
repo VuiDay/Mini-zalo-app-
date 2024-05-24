@@ -1,6 +1,6 @@
 export default {
     info: {
-        label: "THÔNG TIN",
-        inMy: "Về chúng tôi",
+        label: "THÔNG TIN 123",
+        inMy: "Về chúng tôi 123",
     }
 };

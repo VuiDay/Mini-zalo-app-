@@ -1,9 +1,9 @@
-import { createI18n } from "vue-i18n";
+import { createI18n } from "vue-i18n-lite";
 import en from "/src/languages/en";
 import vi from "/src/languages/vi";
 
 const i18n = createI18n({
-    locale: "en",
+    locale: "vi",
     allowComposition: true, // you need to specify that!
     messages: {
         en,
@@ -12,4 +12,5 @@ const i18n = createI18n({
 });
 
 window.$i18n = i18n;
+// window.$i18n.changeLocale("en");
 export default i18n;

@@ -1,6 +1,6 @@
 export default {
-    info: {
-        label: "INFO",
-        inMy: "IN MY",
-    }
+    // info: {
+    //     label: "INFO",
+    //     inMy: "IN MY",
+    // }
 };
