@@ -53,8 +53,8 @@ setTimeout(() => {
 
 .ani {
   position: absolute;
-  bottom: -120px; /* Đặt các thẻ <img> dưới ảnh */
-  width: -140px; /* Đặt chiều rộng của các thẻ <img> */
+  bottom: -140px; /* Đặt các thẻ <img> dưới ảnh */
+  width: 100px; /* Đặt chiều rộng của các thẻ <img> */
   height: 50px; /* Đặt chiều cao của các thẻ <img> */
   animation: move 3s infinite;
 }
