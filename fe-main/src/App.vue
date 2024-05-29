@@ -4,7 +4,6 @@ import { useI18n } from "vue-i18n-lite";
 
 const { t } = useI18n();
 onMounted(() => {
-  console.log(t, "ttt");
   window.$t = t;
 });
 </script>

@@ -13,16 +13,16 @@ export default defineConfig({
     }),
     vue(),
     federation({
-      name: "fe_main",
+      name: "host-app",
       filename: "remoteEntry.js",
       exposes: {
-        './App': './src/App.vue'
+        './Footer': './src/components/Footer.vue'
       },
       remotes: {
-        fe_admin: 'http://localhost:3001/assets/remoteEntry.js',
-        fe_driver: 'http://localhost:3002/assets/remoteEntry.js',
-        fe_restaurant: 'http://localhost:3003/assets/remoteEntry.js',
-        fe_user: 'http://localhost:3004/assets/remoteEntry.js'
+        fe_ordervehicle: 'http://localhost:3001/assets/remoteEntry.js',
+        fe_profile: 'http://localhost:3002/assets/remoteEntry.js',
+        fe_history: 'http://localhost:3003/assets/remoteEntry.js',
+        fe_faq: 'http://localhost:3004/assets/remoteEntry.js'
       },
       shared: {
         vue: {}

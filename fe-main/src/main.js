@@ -3,24 +3,32 @@ import { createApp } from 'vue'
 import App from './App.vue';
 import router from './helper/router';
 import i18n from "./helper/i18n";
+import PrimeVue from 'primevue/config';
+import './index.css'
+import { usePrimeVue } from './theme.js'
+import Lara from './presets/lara'
 import { __federation_method_setRemote, __federation_method_getRemote } from "virtual:__federation__";
 
-window.app = createApp(App).use(router).use(i18n);
+window.app = createApp(App).use(router).use(i18n).use(PrimeVue, {
+    unstyled: true,
+    pt: Lara
+});
+usePrimeVue(window.app)
 const remoteApp = [
     {
-        name: "fe_admin",
+        name: "fe_ordervehicle",
         url: "http://localhost:3001/assets/remoteEntry.js"
     },
     {
-        name: "fe_driver",
+        name: "fe_profile",
         url: "http://localhost:3002/assets/remoteEntry.js"
     },
     {
-        name: "fe_restaurant",
+        name: "fe_history",
         url: "http://localhost:3003/assets/remoteEntry.js"
     },
     {
-        name: "fe_user",
+        name: "fe_faq",
         url: "http://localhost:3004/assets/remoteEntry.js"
     }
 ]
