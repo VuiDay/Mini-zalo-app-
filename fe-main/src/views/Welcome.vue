@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="{ name: 'OrderVehicle' }">
+  <div @click="() => route.push('/order-vehicle')">
     <img
       src="../assets/image/Group 1171275006.png"
       width="100%"
@@ -28,7 +28,7 @@
         <img class="ani" src="../assets/image/khoi.png" alt="" />
       </div>
     </div>
-  </RouterLink>
+  </div>
 </template>
 
 <script setup>
@@ -36,7 +36,7 @@ import { useRouter } from "vue-router";
 const route = useRouter();
 setTimeout(() => {
   route.push("/order-vehicle");
-}, 100000);
+}, 3000);
 </script>
 
 <style scoped>

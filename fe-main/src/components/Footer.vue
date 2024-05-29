@@ -12,10 +12,7 @@
         v-for="(menu, index) of menus"
         class="text-[#C0C5C2] flex flex-col items-center"
       >
-        <RouterLink
-          :to="{ name: menu.route }"
-          class="flex flex-col items-center"
-        >
+        <RouterLink :to="'/' + menu.route" class="flex flex-col items-center">
           <div v-html="menu.icon"></div>
           <p
             style="
@@ -39,14 +36,14 @@
 
 <script setup>
 import { ref } from "vue";
-import { RouterLink } from "vue-router";
+import { routerKey, useRouter } from "vue-router";
 const menus = [
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M12.514 3.47698C12.153 3.19639 11.6477 3.19639 11.2866 3.47698L4.13632 9.03458C3.89258 9.22403 3.75 9.51543 3.75 9.82413V20C3.75 20.5523 4.19772 21 4.75 21H8.35744C8.90972 21 9.35744 20.5523 9.35744 20V14.9581C9.35744 14.4058 9.80515 13.9581 10.3574 13.9581H13.4432C13.9955 13.9581 14.4432 14.4058 14.4432 14.9581V20C14.4432 20.5523 14.891 21 15.4432 21H19.0507C19.603 21 20.0507 20.5523 20.0507 20V9.82413C20.0507 9.51543 19.9081 9.22403 19.6643 9.03458L12.514 3.47698Z" fill="currentColor"/>
 </svg>`,
     title: "Trang chủ",
-    route: "OrderVehicle",
+    route: "order-vehicle",
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="24" viewBox="0 0 23 24" fill="none">
@@ -62,14 +59,14 @@ const menus = [
   </defs>
 </svg>`,
     title: "Lịch sử",
-    route: "History",
+    route: "history",
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M12 12C14.4752 12 16.5 9.97495 16.5 7.5C16.5 5.02505 14.4752 3 12 3C9.52477 3 7.5 5.02505 7.5 7.5C7.5 9.97495 9.52477 12 12 12ZM12 14.25C9.01884 14.25 3 15.7688 3 18.75V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V18.75C21 15.7688 14.9812 14.25 12 14.25Z" fill="currentColor"/>
 </svg>`,
     title: "Cá nhân",
-    route: "Profile",
+    route: "profile",
   },
 ];
 </script>

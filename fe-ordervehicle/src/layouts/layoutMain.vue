@@ -1,5 +1,6 @@
 <template>
   <div>Đây là layout order</div>
+  <RouterView></RouterView>
   <component :is="FooterComponent" />
 </template>
 
