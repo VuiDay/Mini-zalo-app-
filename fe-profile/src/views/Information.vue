@@ -1,44 +1,26 @@
+<script setup>
+import { ref } from "vue";
+import Info from "../components/Info.vue";
+import SideBar from "../components/SideBar.vue";
+
+const name = ref("Nguyen Van");
+</script>
+
 <template>
-  <div class="flex flex-wrap gap-5">
-    <div class="flex-auto">
-      <h5>Label</h5>
-      <Avatar label="P" class="mr-2" size="xlarge" />
-      <Avatar
-        label="V"
-        class="mr-2"
-        size="large"
-        style="background-color: #ece9fc; color: #2a1261"
-      />
-      <Avatar
-        label="U"
-        class="mr-2"
-        style="background-color: #dee9fc; color: #1a2551"
-      />
-    </div>
-
-    <div class="flex-auto">
-      <h5>Circle</h5>
-      <Avatar label="P" class="mr-2" size="xlarge" shape="circle" />
-      <Avatar
-        label="V"
-        class="mr-2"
-        size="large"
-        style="background-color: #ece9fc; color: #2a1261"
-        shape="circle"
-      />
-      <Avatar
-        label="U"
-        class="mr-2"
-        style="background-color: #dee9fc; color: #1a2551"
-        shape="circle"
-      />
-    </div>
-
-    <div class="flex-auto">
-      <h5>Badge</h5>
-      <Avatar v-badge.danger="4" label="U" size="xlarge" />
-    </div>
-  </div>
+  <section class="px-6 relative">
+    <Info :name="name"></Info>
+    <span class="line"></span>
+    <SideBar></SideBar>
+  </section>
 </template>
 
-<script setup></script>
+<style scoped>
+.line::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background-color: #b0b0b0;
+  left: 24px;
+  right: 24px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div>đây là layout profile</div>
+  <router-view></router-view>
   <component :is="FooterComponent"></component>
 </template>
 
