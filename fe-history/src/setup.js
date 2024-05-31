@@ -8,6 +8,7 @@
 //     //     window.$i18n.changeLocale("en");
 //     // }, 5000);
 // }
+import History from "./views/History.vue";
 
 
 if (window.$router) {
@@ -16,7 +17,8 @@ if (window.$router) {
         {
             path: "/history",
             name: "History",
-            component: () => import("@/layouts/layoutMain.vue")
+            component: () => import("@/views/History.vue"),
+
         }
     ];
     routes.forEach((r) => {

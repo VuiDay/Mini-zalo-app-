@@ -1,5 +1,5 @@
 <template>
-  <div>đây là layout history</div>
+
   <component :is="FooterComponent"></component>
 </template>
 
