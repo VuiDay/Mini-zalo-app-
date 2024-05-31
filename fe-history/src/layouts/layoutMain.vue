@@ -1,6 +1,6 @@
 <template>
-  <div>đây là layout history</div>
-  <component :is="FooterComponent"></component>
+  <RouterView></RouterView>
+  <component :is="FooterComponent" />
 </template>
 
 <script setup>

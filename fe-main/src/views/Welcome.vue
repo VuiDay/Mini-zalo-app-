@@ -1,14 +1,8 @@
 <template>
-  <div @click="() => route.push('/order-vehicle')">
-    <img
-      src="../assets/image/Group 1171275006.png"
-      width="100%"
-      alt=""
-      class="top-0 right-0 left-0"
-    />
+  <RouterLink :to="{ name: 'OrderVehicle' }">
+    <img src="../assets/image/Group 1171275006.png" width="100%" alt="" class="top-0 right-0 left-0" />
     <div class="mt-[35px] flex flex-col items-center">
-      <p
-        style="
+      <p style="
           color: #2ecb70;
           text-align: center;
           font-family: 'Anton', sans-serif;
@@ -17,8 +11,7 @@
           font-weight: 800;
           line-height: 20px; /* 41.667% */
           letter-spacing: -0.48px;
-        "
-      >
+        ">
         GoDrive
       </p>
       <div class="mt-[30px] animate">
@@ -28,7 +21,7 @@
         <img class="ani" src="../assets/image/khoi.png" alt="" />
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 
 <script setup>
@@ -42,20 +35,25 @@ setTimeout(() => {
 <style scoped>
 .animate {
   position: relative;
-  width: 100%; /* Đảm bảo phần tử .animate chiếm toàn bộ chiều rộng */
-  height: 150px; /* Đặt chiều cao tùy ý */
+  width: 100%;
+  /* Đảm bảo phần tử .animate chiếm toàn bộ chiều rộng */
+  height: 150px;
+  /* Đặt chiều cao tùy ý */
 }
 
-.animate > img {
+.animate>img {
   display: block;
   margin: 0 auto;
 }
 
 .ani {
   position: absolute;
-  bottom: -140px; /* Đặt các thẻ <img> dưới ảnh */
-  width: 100px; /* Đặt chiều rộng của các thẻ <img> */
-  height: 50px; /* Đặt chiều cao của các thẻ <img> */
+  bottom: -140px;
+  /* Đặt các thẻ <img> dưới ảnh */
+  width: 100px;
+  /* Đặt chiều rộng của các thẻ <img> */
+  height: 50px;
+  /* Đặt chiều cao của các thẻ <img> */
   animation: move 3s infinite;
 }
 
@@ -69,15 +67,20 @@ setTimeout(() => {
 
 @keyframes move {
   0% {
-    right: -50px; /* Đặt vị trí ban đầu của các thẻ <img> ra ngoài màn hình bên phải */
+    right: -50px;
+    /* Đặt vị trí ban đầu của các thẻ <img> ra ngoài màn hình bên phải */
     opacity: 0;
   }
+
   50% {
-    right: 50%; /* Đặt vị trí giữa màn hình */
+    right: 50%;
+    /* Đặt vị trí giữa màn hình */
     opacity: 1;
   }
+
   100% {
-    right: 100%; /* Đặt vị trí kết thúc của các thẻ <img> ra ngoài màn hình bên trái */
+    right: 100%;
+    /* Đặt vị trí kết thúc của các thẻ <img> ra ngoài màn hình bên trái */
     opacity: 0;
   }
 }
