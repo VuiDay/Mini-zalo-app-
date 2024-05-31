@@ -20,7 +20,20 @@ if (window.$router) {
             children: [
                 {
                     path: "",
+                    name: 'main',
                     component: () => import("@/views/Main.vue"),
+                },
+            ]
+        },
+        {
+            path: "/booking",
+            name: 'booking',
+            component: () => import("@/layouts/layoutBooking.vue"),
+            children: [
+                {
+                    path: "",
+                    name: 'formbooking',
+                    component: () => import("@/views/BookingForm.vue"),
                 }
             ]
         }
@@ -28,6 +41,7 @@ if (window.$router) {
     routes.forEach((r) => {
         const existed = addedRoute.find((r2) => r2.path === r.path);
         if (!existed) {
+            console.log(window.$router, '123')
             window.$router.addRoute(r);
         }
     });
