@@ -1,5 +1,5 @@
 <script setup>
-import HistoryCar from "../views/components/HistoryCar.vue"
+import HistoryCar from "./HistoryCar.vue"
 </script>
 <template>
     <section>
