@@ -8,17 +8,29 @@
 //     //     window.$i18n.changeLocale("en");
 //     // }, 5000);
 // }
-import History from "./views/History.vue";
 
+import HistoryDetail from "@/views/details/HistoryDetails.vue"
 
 if (window.$router) {
     const addedRoute = window.$router.getRoutes();
     const routes = [
         {
             path: "/history",
-            name: "History",
-            component: () => import("@/views/History.vue"),
+            name: "HistoryCar",
+            component: () => import("@/layouts/layoutMain.vue"),
+            children: [
+                {
+                    path: "",
+                    name: "HistoryMain",
+                    component: () => import("@/views/History.vue"),
+                },
 
+                {
+                    path: "history-detail",
+                    name: "HistoryDetail",
+                    component: () => import("@/views/details/HistoryDetails.vue")
+                }
+            ]
         }
     ];
     routes.forEach((r) => {

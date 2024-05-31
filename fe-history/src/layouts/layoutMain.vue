@@ -1,6 +1,6 @@
 <template>
-
-  <component :is="FooterComponent"></component>
+  <RouterView></RouterView>
+  <component :is="FooterComponent" />
 </template>
 
 <script setup>

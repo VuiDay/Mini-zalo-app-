@@ -16,7 +16,13 @@ if (window.$router) {
         {
             path: "/order-vehicle",
             name: "OrderVehicle",
-            component: () => import("@/layouts/layoutMain.vue")
+            component: () => import("@/layouts/layoutMain.vue"),
+            children: [
+                {
+                    path: "",
+                    component: () => import("@/views/Main.vue"),
+                }
+            ]
         }
     ];
     routes.forEach((r) => {
