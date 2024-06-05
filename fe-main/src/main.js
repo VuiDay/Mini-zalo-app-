@@ -2,13 +2,16 @@ import { createApp } from 'vue'
 import App from './App.vue';
 import router from './helper/router';
 import i18n from "./helper/i18n";
+import store from './helper/store.js';
 import PrimeVue from 'primevue/config';
-import './index.css'
+import './style.css'
 import { usePrimeVue } from './theme.js'
 import Lara from './presets/lara'
 import { __federation_method_setRemote, __federation_method_getRemote } from "virtual:__federation__";
+import { createPinia } from "pinia";
 
-window.app = createApp(App).use(router).use(i18n).use(PrimeVue, {
+const pinia = createPinia();
+window.app = createApp(App).use(router).use(pinia).use(store).use(i18n).use(PrimeVue, {
     unstyled: true,
     pt: Lara
 });

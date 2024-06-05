@@ -1,8 +1,14 @@
 <template>
   <RouterLink :to="{ name: 'OrderVehicle' }">
-    <img src="../assets/image/Group 1171275006.png" width="100%" alt="" class="top-0 right-0 left-0" />
+    <img
+      src="../assets/image/Group 1171275006.png"
+      width="100%"
+      alt=""
+      class="top-0 right-0 left-0"
+    />
     <div class="mt-[35px] flex flex-col items-center">
-      <p style="
+      <p
+        style="
           color: #2ecb70;
           text-align: center;
           font-family: 'Anton', sans-serif;
@@ -11,7 +17,8 @@
           font-weight: 800;
           line-height: 20px; /* 41.667% */
           letter-spacing: -0.48px;
-        ">
+        "
+      >
         GoDrive
       </p>
       <div class="mt-[30px] animate">
@@ -41,7 +48,7 @@ setTimeout(() => {
   /* Đặt chiều cao tùy ý */
 }
 
-.animate>img {
+.animate > img {
   display: block;
   margin: 0 auto;
 }

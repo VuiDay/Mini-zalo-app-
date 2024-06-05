@@ -1,5 +1,7 @@
-import en from "/src/languages/en";
-import vi from "/src/languages/vi";
+import en from "@/languages/en";
+import vi from "@/languages/vi";
+import { useOrderVehicleStore } from './stores/orderVehicle';
+import './style.css';
 
 if (window.$i18n) {
     window.$i18n.setLocaleMessage("vi", vi);
@@ -45,4 +47,16 @@ if (window.$router) {
             window.$router.addRoute(r);
         }
     });
+}
+
+
+if (window.$stores) {
+    // window.$stores.layout.tab.push({
+    //     label: window.remoteApp["orderVehicle"].label || "Sản phẩm",
+    //     icon: window.remoteApp["orderVehicle"].icon || "pi pi-inbox",
+    //     position: window.remoteApp["orderVehicle"].position,
+    //     component: shallowRef(Product),
+    //     role: ["owner", "manage", "staff", "user"]
+    // });
+    window.$stores.orderVehicle = useOrderVehicleStore;
 }

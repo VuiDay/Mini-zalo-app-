@@ -1,18 +1,24 @@
 <template>
-  <div style="padding: 36px 24px 0 24px">
-    <p
-      style="
-        color: #111;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.8px;
-      "
-    >
-      Đặt
-    </p>
-    <div class="" style="margin-top: 15px">
+  <div style="padding: 36px 24px 0 24px" class="relative">
+    <div class="flex items-center">
+      <p
+        onclick="history.back()"
+        style="
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          padding: 14px 20px;
+          border-radius: 50px;
+        "
+      >
+        <img src="/arrowleft.svg" alt="" />
+      </p>
+      <p
+        class="text-[#111] ml-[10px] text-[20px] font-bold leading-normal tracking-[-0.8px]"
+      >
+        Đặt xe
+      </p>
+    </div>
+
+    <div v-if="active === 0" class="" style="margin-top: 15px">
       <div class="flex flex-col" style="margin-bottom: 10px">
         <label
           for=""
@@ -59,7 +65,7 @@
           "
         />
       </div>
-      <div class="flex flex-col !text-[#2ECB70]" style="margin-bottom: 10px">
+      <div class="flex flex-col" style="margin-bottom: 10px">
         <label
           for=""
           style="
@@ -72,27 +78,226 @@
           "
           >Chọn phương tiện của bạn</label
         >
-        <div class="flex justify-between">
-          <span v-html="iconBike"> </span>
-          <span v-html="iconCar"> </span>
+        <div class="flex justify-between mt-2">
+          <span v-html="iconBike" @click=""></span>
+          <span v-html="iconCar"></span>
         </div>
       </div>
+      <div style="margin-top: 20px">
+        <button
+          style="
+            width: 327px;
+            height: 56px;
+            border-radius: 50px;
+            background: #2ecb70;
+            box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25);
+            color: white;
+          "
+          @click="() => (active = 1)"
+        >
+          Xác nhận đặt xe
+        </button>
+      </div>
     </div>
-    <div class="flex justify-between">
-      <span
-        onclick="history.back()"
-        v-html="arrowLeft"
-        style="border-radius: 50px; padding: 8px; background-color: #f0f5f5"
-      ></span>
-      <span
-        v-html="arrowRight"
-        style="border-radius: 50px; padding: 8px; background-color: #f0f5f5"
-      ></span>
+    <div v-if="active === 1" style="margin-top: 15px">
+      <p
+        style="
+          color: #111;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          letter-spacing: -0.8px;
+        "
+      >
+        Xác nhận đặt
+      </p>
+      <div class="flex items-start justify-between" style="margin-top: 15px">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+          "
+        >
+          <img src="/locatered.svg" alt="" />
+          <img src="/ellipse.svg" alt="" />
+          <img src="/ellipse.svg" alt="" />
+          <img src="/dot.svg" alt="" />
+        </div>
+        <div
+          class="mb-2 flex flex-col items-start"
+          style="gap: 10px; width: 70%"
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 4px;
+            "
+          >
+            <p
+              style="
+                color: #77869e;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: 0.239px;
+              "
+            >
+              Vị trí hiện tại
+            </p>
+            <p
+              style="
+                color: #111;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                letter-spacing: 0.4px;
+              "
+            >
+              32 Samwell Sq, Chevron
+            </p>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 4px;
+            "
+          >
+            <p
+              style="
+                color: #77869e;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: 0.239px;
+              "
+            >
+              Điểm đến
+            </p>
+            <p
+              style="
+                color: #111;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                letter-spacing: 0.4px;
+              "
+            >
+              21b, Karimu Kotun Street, Victoria Island
+            </p>
+          </div>
+        </div>
+        <div>
+          <img src="/iconbike.svg" alt="" />
+        </div>
+      </div>
+      <div>
+        <div style="margin: 25px 0">
+          <p
+            style="
+              color: #77869e;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px;
+            "
+          >
+            Cửa hàng
+          </p>
+          <p
+            style="
+              color: #111;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 24px; /* 171.429% */
+            "
+          >
+            ABCDEF
+          </p>
+        </div>
+        <div style="margin: 25px 0">
+          <p
+            style="
+              color: #77869e;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px; /* 133.333% */
+            "
+          >
+            Thanh toán
+          </p>
+          <p
+            style="
+              color: #111;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 24px; /* 171.429% */
+            "
+          >
+            Thẻ
+          </p>
+        </div>
+        <div style="margin: 25px 0">
+          <p
+            style="
+              color: #77869e;
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px; /* 133.333% */
+            "
+          >
+            Giá
+          </p>
+          <p
+            style="
+              color: #111;
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 24px; /* 171.429% */
+            "
+          >
+            150.000VNĐ
+          </p>
+        </div>
+      </div>
+      <div style="margin-top: 20px">
+        <button
+          style="
+            width: 327px;
+            height: 56px;
+            border-radius: 50px;
+            background: #2ecb70;
+            box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25);
+            color: white;
+          "
+          @click=""
+        >
+          Xác nhận
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
+const active = ref(0);
+
 const iconCar = `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="97" viewBox="0 0 150 97" fill="none">
   <g clip-path="url(#clip0_4005_5233)">
     <rect width="150" height="97" fill="#F0F5F5"/>
@@ -117,8 +322,6 @@ const iconBike = `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="97
     </clipPath>
   </defs>
 </svg>`;
-const arrowLeft = `<svg viewBox="0 0 24 24" width="30px" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke="#2ECB70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`;
-const arrowRight = `<svg viewBox="0 0 24 24" width="30px" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#2ECB70" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`;
 const fakeData = [{}, {}];
 </script>
 
