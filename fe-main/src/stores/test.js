@@ -1,18 +1,16 @@
 import { defineStore } from 'pinia';
 
-export const useTestStore = defineStore('test', {
+export const userStore = defineStore('user', {
     state: () => ({
-        counter: 1,
+        userInfor: []
+
     }),
     getters: {
-        doubleCounter: (state) => state.counter * 2,
+
     },
     actions: {
-        increment() {
-            this.counter++;
-        },
-        decrement() {
-            this.counter--;
-        },
+        async saveInforUser(data) {
+            this.userInfor = data
+        }
     },
 });

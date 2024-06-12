@@ -69,8 +69,4 @@ const menus = [
 ];
 </script>
 
-<style scoped>
-.router-link-exact-active {
-  color: #2ecb70;
-}
-</style>
+<style></style>

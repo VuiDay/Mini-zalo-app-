@@ -1,12 +1,11 @@
-import { useTestStore } from '../stores/test'
+import { userStore } from '../stores/test'
 
 const setupStores = () => {
     if (window.$stores) {
         window.location.reload();
     }
-    console.log(useTestStore(), "useTestStore()")
     window.$stores = {
-        test: useTestStore(),
+        user: userStore(),
     };
 };
 

@@ -33,10 +33,26 @@
 
 <script setup>
 import { useRouter } from "vue-router";
+import { getUserInfo } from "zmp-sdk/apis";
+
+const store = window.$stores.user;
+
 const route = useRouter();
-setTimeout(() => {
-  route.push("/order-vehicle");
-}, 3000);
+
+getUserInfo({
+  success: async (data) => {
+    // xử lý khi gọi api thành công
+    const { userInfo } = data;
+    await store.saveInforUser(userInfo);
+    if (store.userInfor) {
+      route.push("/order-vehicle");
+    }
+  },
+  fail: (error) => {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  },
+});
 </script>
 
 <style scoped>

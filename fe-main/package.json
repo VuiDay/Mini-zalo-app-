@@ -5,19 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base http://localhost:3000",
     "bw": "vite build --watch --base http://localhost:3000",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "npx patch-package"
   },
   "dependencies": {
     "@originjs/vite-plugin-federation": "^1.3.5",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "primevue": "^3.52.0",
+    "vite-plugin-loading-script": "^1.0.2",
     "vite-plugin-top-level-await": "^1.4.1",
     "vue": "^3.4.21",
     "vue-i18n-lite": "^1.0.2",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zmp-sdk": "^2.38.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

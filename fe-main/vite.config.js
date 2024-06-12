@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from "path";
 import federation from '@originjs/vite-plugin-federation'
 import topLevelAwait from "vite-plugin-top-level-await";
+import { loadingScript } from "vite-plugin-loading-script";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,6 +11,10 @@ export default defineConfig({
     topLevelAwait({
       promiseExportName: "__tla",
       promiseImportName: (i) => `__tla_${i}`
+    }),
+    loadingScript({
+      externalSrc: `${process.env.VITE_REMOTE_URL}/`,
+      fileName: "app.js"
     }),
     vue(),
     federation({

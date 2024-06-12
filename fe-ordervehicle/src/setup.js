@@ -1,7 +1,7 @@
 import en from "@/languages/en";
 import vi from "@/languages/vi";
 import { useOrderVehicleStore } from './stores/orderVehicle';
-import './style.css';
+// import './style.css';
 
 if (window.$i18n) {
     window.$i18n.setLocaleMessage("vi", vi);
