@@ -3,8 +3,7 @@
     <div class="flex justify-between">
       <p style="font-size: 14px; color: #111; font-weight: 600">Lịch sử</p>
       <RouterLink
-        to="#"
-        class=""
+        to="/history"
         style="color: rgba(46, 203, 112, 0.8); font-size: 12px"
         >Xem tất cả</RouterLink
       >
