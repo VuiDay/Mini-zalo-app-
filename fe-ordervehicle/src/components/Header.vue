@@ -30,19 +30,25 @@
             line-height: 20px;
           "
         >
-          Cường Trần
+          {{ userName.name }}
         </p>
       </div>
       <div>
-        <Avatar
-          image="https://res.cloudinary.com/dn6xdmqbl/image/upload/v1716228175/avatar_user/es2wxaefwkqft9vhocpu.jpg"
-          shape="circle"
-        />
+        <Avatar :image="userName.avatar" shape="circle" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, watchEffect } from "vue";
+
+const store = window.$stores.user;
+const userName = ref("");
+
+watchEffect(() => {
+  userName.value = store.userInfor;
+});
+</script>
 
 <style scoped></style>

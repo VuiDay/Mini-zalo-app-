@@ -76,3 +76,7 @@
     --primary-highlight-hover-opacity: 0.2;
   }
 }
+
+.router-link-exact-active {
+  color: #2ecb70;
+}

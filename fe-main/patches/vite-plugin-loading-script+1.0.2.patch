@@ -1,0 +1,19 @@
+diff --git a/node_modules/vite-plugin-loading-script/dist/index.js b/node_modules/vite-plugin-loading-script/dist/index.js
+index b1c2037..69f9fe2 100644
+--- a/node_modules/vite-plugin-loading-script/dist/index.js
++++ b/node_modules/vite-plugin-loading-script/dist/index.js
+@@ -1,4 +1,4 @@
+-"use strict";Object.defineProperty(exports, "__esModule", {value: true}); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }// src/index.ts
++"use strict"; Object.defineProperty(exports, "__esModule", { value: true }); function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }// src/index.ts
+ var _hashsum = require('hash-sum'); var _hashsum2 = _interopRequireDefault(_hashsum);
+ function loadingScript({ externalSrc, fileName = "app", crossorigin = false, crossoriginVal = "" } = {}) {
+   return {
+@@ -8,7 +8,7 @@ function loadingScript({ externalSrc, fileName = "app", crossorigin = false, cro
+       const newScript = generateLoadingScript(bundle, externalSrc, crossorigin, crossoriginVal);
+       this.emitFile({
+         type: "asset",
+-        fileName: `${fileName}.${_hashsum2.default.call(void 0, newScript)}.js`,
++        fileName: `${fileName}`,
+         source: newScript
+       });
+     }
