@@ -10,7 +10,7 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
       class="w-[72px] h-[72px] font-semibold rounded-full flex justify-center items-center stand-for-name"
       >{{ standForName }}</span
     >
-    <h3 class="font-medium name">{{ props.name }}</h3>
+    <h3 class="font-medium mb-[25px] text-[#111] text-lg">{{ props.name }}</h3>
   </div>
 </template>
 
@@ -24,11 +24,5 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
   background-color: rgba(46, 203, 112, 0.6);
   margin-top: 20px;
   gap: 12px;
-}
-
-.name {
-  color: #111;
-  font-size: 18px;
-  margin-bottom: 25px;
 }
 </style>
