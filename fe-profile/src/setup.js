@@ -1,4 +1,4 @@
-console.log(1);
+import "./style.css";
 
 if (window.$router) {
   const addedRoute = window.$router.getRoutes();
@@ -13,6 +13,21 @@ if (window.$router) {
           component: () => import("@/views/Information.vue"),
         },
       ],
+    },
+    {
+      path: "/faq",
+      name: "FAQ",
+      component: () => import("@/views/FAQ.vue"),
+    },
+    {
+      path: "/invite",
+      name: "Invite",
+      component: () => import("@/views/InviteFriend.vue"),
+    },
+    {
+      path: "/registration",
+      name: "Registration",
+      component: () => import("@/views/Registration.vue"),
     },
   ];
   routes.forEach((r) => {
