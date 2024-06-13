@@ -34,30 +34,43 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { getUserInfo } from "zmp-sdk/apis";
-import { getPhoneNumber } from "zmp-sdk/apis";
+import { authorize } from "zmp-sdk/apis";
 
 const store = window.$stores.user;
 
 const route = useRouter();
 
-getUserInfo({
-  success: async (data) => {
+// getUserInfo({
+//   success: async (data) => {
+//     // xử lý khi gọi api thành công
+//     const { userInfo } = data;
+//     // getPhoneNumber({
+//     //   success: async (data) => {
+//     //     let { token } = data;
+//     //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
+//     //   },
+//     //   fail: (error) => {
+//     //     console.log(error);
+//     //   },
+//     // });
+//     await store.saveInforUser(userInfo);
+//     console.log(userInfo);
+//     if (store.userInfor) {
+//       route.push("/order-vehicle");
+//     }
+//   },
+//   fail: (error) => {
+//     // xử lý khi gọi api thất bại
+//     console.log(error);
+//   },
+// });
+//
+
+authorize({
+  scopes: ["scope.userLocation", "scope.userPhonenumber"],
+  success: (data) => {
     // xử lý khi gọi api thành công
-    const { userInfo } = data;
-    // getPhoneNumber({
-    //   success: async (data) => {
-    //     let { token } = data;
-    //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
-    //   },
-    //   fail: (error) => {
-    //     console.log(error);
-    //   },
-    // });
-    await store.saveInforUser(userInfo);
-    console.log(userInfo);
-    if (store.userInfor) {
-      route.push("/order-vehicle");
-    }
+    console.log(data);
   },
   fail: (error) => {
     // xử lý khi gọi api thất bại
