@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="relative">
-      <img class="w-[100%]" src="@/assets/image/header.png" alt="" />
+      <img class="w-[100%] h-[150px]" src="@/assets/image/header.png" alt="" />
     </div>
-    <div class="flex justify-between absolute w-[100%] px-[20px] mt-[75px]">
+    <div class="flex justify-between absolute w-[100%] px-[20px] top-[60px]">
       <div>
         <p
           style="
