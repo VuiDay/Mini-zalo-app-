@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps(["name"]);
+const props = defineProps(["name", "avatar"]);
 const words = props.name.split(" ");
 const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
 </script>
@@ -7,6 +7,13 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
 <template>
   <div class="flex flex-col justify-center items-center gap-3">
     <span
+      v-if="props.avatar"
+      class="w-[72px] h-[72px] font-semibold rounded-full flex justify-center items-center stand-for-name"
+    >
+      <img :src="avatar" :alt="standForName" />
+    </span>
+    <span
+      v-else
       class="w-[72px] h-[72px] font-semibold rounded-full flex justify-center items-center stand-for-name"
       >{{ standForName }}</span
     >
@@ -22,7 +29,7 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
   font-size: 32px;
   line-height: 20px;
   background-color: rgba(46, 203, 112, 0.6);
-  margin-top: 20px;
+  margin-top: 35px;
   gap: 12px;
 }
 </style>

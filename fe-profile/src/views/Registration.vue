@@ -8,7 +8,7 @@ const value = ref(null);
 const term = ref(false);
 </script>
 <template>
-  <section class="px-6 py-[18px]">
+  <section class="px-6 py-[18px] pt-[35px]">
     <div
       class="w-9 h-9 rounded-full bg-[#2ECB70] flex justify-center items-center mb-[15px]"
       onclick="history.back()"
