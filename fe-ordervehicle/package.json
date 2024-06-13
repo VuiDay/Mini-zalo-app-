@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base https://ordervehicle-mini-app.pages.dev",
+    "build": "vite build",
     "bw": "vite build --watch --base https://ordervehicle-mini-app.pages.dev",
     "preview": "vite preview"
   },
