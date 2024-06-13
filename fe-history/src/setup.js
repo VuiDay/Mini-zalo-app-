@@ -9,34 +9,34 @@
 //     // }, 5000);
 // }
 
-import HistoryDetail from "@/views/details/HistoryDetails.vue"
+import HistoryDetail from "@/views/details/HistoryDetails.vue";
 
 if (window.$router) {
-    const addedRoute = window.$router.getRoutes();
-    const routes = [
+  const addedRoute = window.$router.getRoutes();
+  const routes = [
+    {
+      path: "/history",
+      name: "HistoryCar",
+      component: () => import("@/layouts/layoutMain.vue"),
+      children: [
         {
-            path: "/history",
-            name: "HistoryCar",
-            component: () => import("@/layouts/layoutMain.vue"),
-            children: [
-                {
-                    path: "",
-                    name: "HistoryMain",
-                    component: () => import("@/views/History.vue"),
-                },
+          path: "",
+          name: "HistoryMain",
+          component: () => import("@/views/History.vue"),
+        },
 
-                {
-                    path: "history-detail",
-                    name: "HistoryDetail",
-                    component: () => import("@/views/details/HistoryDetails.vue")
-                }
-            ]
-        }
-    ];
-    routes.forEach((r) => {
-        const existed = addedRoute.find((r2) => r2.path === r.path);
-        if (!existed) {
-            window.$router.addRoute(r);
-        }
-    });
+        {
+          path: "history-detail",
+          name: "HistoryDetail",
+          component: () => import("@/views/details/HistoryDetails.vue"),
+        },
+      ],
+    },
+  ];
+  routes.forEach((r) => {
+    const existed = addedRoute.find((r2) => r2.path === r.path);
+    if (!existed) {
+      window.$router.addRoute(r);
+    }
+  });
 }
