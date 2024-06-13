@@ -33,8 +33,7 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getUserInfo } from "zmp-sdk/apis";
-import { authorize } from "zmp-sdk/apis";
+import { getUserInfo, getSetting, authorize } from "zmp-sdk/apis";
 
 const store = window.$stores.user;
 
@@ -66,8 +65,19 @@ const route = useRouter();
 // });
 //
 
+// const getSettings = async () => {
+//   try {
+//     const data = await getSetting({});
+//     console.log(data);
+//   } catch (error) {
+//     // xử lý khi gọi api thất bại
+//     console.log(error);
+//   }
+// };
+// getSettings();
+
 authorize({
-  scopes: ["scope.userInfo", "scope.userPhonenumber"],
+  scopes: ["scope.userInfo"],
   success: (data) => {
     // xử lý khi gọi api thành công
     console.log(data, "123");
