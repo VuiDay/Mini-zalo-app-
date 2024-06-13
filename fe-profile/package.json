@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "bw": "vite build --watch --base https://profile-mini-app.pages.dev",
+    "build": "vite build --base https://profile-mini-app.pages.dev",
+    "bw": "vite build --watch --base http://localhost:3002",
     "preview": "vite preview"
   },
   "dependencies": {

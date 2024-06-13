@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "bw": "vite build --watch --base https://mini-zalo-app.pages.dev",
+    "build": "vite build --base https://mini-zalo-app.pages.dev",
+    "bw": "vite build --watch --base http://localhost:3000",
     "preview": "vite preview",
     "postinstall": "npx patch-package"
   },
