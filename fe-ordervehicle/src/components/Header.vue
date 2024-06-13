@@ -3,10 +3,7 @@
     <div class="relative">
       <img class="w-[100%]" src="@/assets/image/header.png" alt="" />
     </div>
-    <div
-      class="flex justify-between absolute w-[100%] px-[20px]"
-      style="top: 45px"
-    >
+    <div class="flex justify-between absolute w-[100%] px-[20px] mt-[75px]">
       <div>
         <p
           style="
