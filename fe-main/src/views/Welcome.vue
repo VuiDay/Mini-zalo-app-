@@ -34,6 +34,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { getUserInfo } from "zmp-sdk/apis";
+import { getPhoneNumber } from "zmp-sdk/apis";
 
 const store = window.$stores.user;
 
@@ -43,7 +44,15 @@ getUserInfo({
   success: async (data) => {
     // xử lý khi gọi api thành công
     const { userInfo } = data;
-    await store.saveInforUser(userInfo);
+    getPhoneNumber({
+      success: async (data) => {
+        let { token } = data;
+        await store.saveInforUser({ ...userInfo, tokenPhone: token });
+      },
+      fail: (error) => {
+        console.log(error);
+      },
+    });
     if (store.userInfor) {
       route.push("/order-vehicle");
     }

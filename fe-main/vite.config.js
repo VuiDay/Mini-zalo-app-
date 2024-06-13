@@ -24,10 +24,9 @@ export default defineConfig({
         './Footer': './src/components/Footer.vue'
       },
       remotes: {
-        fe_ordervehicle: 'http://localhost:3001/assets/remoteEntry.js',
+        fe_ordervehicle: 'http://localhost:3001/remoteEntry.js',
         fe_profile: 'http://localhost:3002/assets/remoteEntry.js',
-        fe_history: 'http://localhost:3003/assets/remoteEntry.js',
-        fe_faq: 'http://localhost:3004/assets/remoteEntry.js'
+        fe_history: 'http://localhost:3003/assets/remoteEntry.js'
       },
       shared: {
         vue: {}
