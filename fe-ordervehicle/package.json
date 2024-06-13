@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base http://localhost:3001",
     "bw": "vite build --watch --base http://localhost:3001",
     "preview": "vite preview"
   },
