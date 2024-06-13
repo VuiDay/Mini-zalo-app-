@@ -44,15 +44,16 @@ getUserInfo({
   success: async (data) => {
     // xử lý khi gọi api thành công
     const { userInfo } = data;
-    getPhoneNumber({
-      success: async (data) => {
-        let { token } = data;
-        await store.saveInforUser({ ...userInfo, tokenPhone: token });
-      },
-      fail: (error) => {
-        console.log(error);
-      },
-    });
+    // getPhoneNumber({
+    //   success: async (data) => {
+    //     let { token } = data;
+    //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
+    //   },
+    //   fail: (error) => {
+    //     console.log(error);
+    //   },
+    // });
+    await store.saveInforUser(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
     }
