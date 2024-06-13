@@ -67,7 +67,7 @@ const route = useRouter();
 //
 
 authorize({
-  scopes: ["scope.userLocation", "scope.userPhonenumber"],
+  scopes: ["scope.userInfo", "scope.userLocation", "scope.userPhonenumber"],
   success: (data) => {
     // xử lý khi gọi api thành công
     console.log(data);
