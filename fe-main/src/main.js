@@ -19,15 +19,15 @@ usePrimeVue(window.app)
 const remoteApp = [
     {
         name: "fe_ordervehicle",
-        url: "http://localhost:3001/assets/remoteEntry.js"
+        url: "https://ordervehicle-mini-app.pages.dev/assets/remoteEntry.js"
     },
     {
         name: "fe_profile",
-        url: "http://localhost:3002/assets/remoteEntry.js"
+        url: "https://profile-mini-app.pages.dev/assets/remoteEntry.js"
     },
     {
         name: "fe_history",
-        url: "http://localhost:3003/assets/remoteEntry.js"
+        url: "https://history-mini-app.pages.dev/assets/remoteEntry.js"
     }
 ]
 
