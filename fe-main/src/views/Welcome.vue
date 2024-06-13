@@ -1,5 +1,5 @@
 <template>
-  <RouterLink :to="{ name: 'OrderVehicle' }">
+  <RouterLink to="/order-vehicle">
     <img
       src="../assets/image/Group 1171275006.png"
       width="100%"

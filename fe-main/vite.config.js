@@ -13,7 +13,7 @@ export default defineConfig({
       promiseImportName: (i) => `__tla_${i}`
     }),
     loadingScript({
-      externalSrc: `${process.env.VITE_REMOTE_URL}/`,
+      externalSrc: `https://mini-zalo-app.pages.dev/`,
       fileName: "app.js"
     }),
     vue(),
