@@ -17,7 +17,7 @@ export default defineConfig({
       "./setup": "./src/setup.js"
     },
     remotes: {
-      master_app: "http://localhost:3000/assets/remoteEntry.js"
+      master_app: "https://mini-zalo-app.pages.dev/assets/remoteEntry.js"
     },
     shared: {
       vue: {},
