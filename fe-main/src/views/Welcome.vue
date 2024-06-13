@@ -67,14 +67,14 @@ const route = useRouter();
 //
 
 authorize({
-  scopes: ["scope.userInfo"],
+  scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
     // xử lý khi gọi api thành công
-    console.log(data);
+    console.log(data, "123");
   },
   fail: (error) => {
     // xử lý khi gọi api thất bại
-    console.log(error);
+    console.log(error, "234");
   },
 });
 </script>
