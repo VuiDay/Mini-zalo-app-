@@ -54,6 +54,7 @@ getUserInfo({
     //   },
     // });
     await store.saveInforUser(userInfo);
+    console.log(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
     }
