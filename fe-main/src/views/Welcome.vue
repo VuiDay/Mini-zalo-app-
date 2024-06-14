@@ -39,6 +39,7 @@ import {
   authorize,
   closeApp,
   getAccessToken,
+  getPhoneNumber,
 } from "zmp-sdk/apis";
 
 const store = window.$stores.user;
@@ -83,7 +84,7 @@ const closeMiniApp = async () => {
   }
 };
 
-const test = async () => {
+const access = async () => {
   try {
     const accessToken = await getAccessToken({});
     console.log(accessToken);
@@ -93,6 +94,19 @@ const test = async () => {
   }
 };
 
+const getPhone = () => {
+  getPhoneNumber({
+    success: async (data) => {
+      let { token } = data;
+      console.log(token);
+    },
+    fail: (error) => {
+      // Xử lý khi gọi api thất bại
+      console.log(error);
+    },
+  });
+};
+
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
@@ -100,7 +114,8 @@ authorize({
       closeMiniApp();
     } else if (!data.code) {
       getUser();
-      test();
+      access();
+      getPhone();
     }
   },
   fail: (error) => {
