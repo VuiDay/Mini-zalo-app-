@@ -16,6 +16,7 @@ export const userStore = defineStore("user", {
       this.accessToken = data;
     },
     async saveToken(data) {
+      console.log(data);
       this.token = data;
     },
   },
