@@ -65,7 +65,6 @@ const route = useRouter();
 const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
-    console.log(userInfo);
     await store.saveInforUser(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
@@ -87,7 +86,7 @@ const closeMiniApp = async () => {
 const access = async () => {
   try {
     const accessToken = await getAccessToken({});
-    console.log(accessToken, "access");
+    store.accessToken = accessToken;
   } catch (error) {
     // xử lý khi gọi api thất bại
     console.log(error);
@@ -98,7 +97,7 @@ const getPhone = () => {
   getPhoneNumber({
     success: async (data) => {
       let { token } = data;
-      console.log(token, "token");
+      store.token = token;
     },
     fail: (error) => {
       // Xử lý khi gọi api thất bại
