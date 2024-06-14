@@ -73,9 +73,10 @@ authorize({
   success: (data) => {
     // xử lý khi gọi api thành công
     console.log(data, scope.userInfo);
-    if (data?.scope.userInfo) {
-      getUser();
-    }
+    // if (data?.scope.userInfo) {
+    //   getUser();
+    // }
+    getUser();
   },
   fail: (error) => {
     // xử lý khi gọi api thất bại
