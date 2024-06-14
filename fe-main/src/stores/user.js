@@ -9,14 +9,13 @@ export const userStore = defineStore("user", {
   getters: {},
   actions: {
     async saveInforUser(data) {
-      console.log(data);
-      this.userInfor = data;
+      const dataUser = { ...data, accessTk: this.accessToken, tk: this.token };
+      this.userInfor = dataUser;
     },
     async saveAccessTTk(data) {
       this.accessToken = data;
     },
     async saveToken(data) {
-      console.log(data);
       this.token = data;
     },
   },

@@ -76,7 +76,7 @@ const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
     await getAccess();
-    getPhoneNumber({
+    await getPhoneNumber({
       success: async (data) => {
         let { token } = data;
         console.log(token, "token");
@@ -87,12 +87,7 @@ const getUser = async () => {
         console.log(error);
       },
     });
-    const dataUser = {
-      ...userInfo,
-      accessTk: store.accessToken,
-      tk: store.token,
-    };
-    await store.saveInforUser(dataUser);
+    await store.saveInforUser(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
     }
