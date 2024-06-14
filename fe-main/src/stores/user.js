@@ -8,15 +8,16 @@ export const userStore = defineStore("user", {
   }),
   getters: {},
   actions: {
-    async saveInforUser(data) {
-      const dataUser = { ...data, accessTk: this.accessToken, tk: this.token };
-      this.userInfor = dataUser;
-    },
     async saveAccessTTk(data) {
       this.accessToken = data;
     },
     async saveToken(data) {
       this.token = data;
+    },
+    async saveInforUser(data) {
+      const dataUser = { ...data, accessTk: this.accessToken, tk: this.token };
+      console.log(dataUser);
+      this.userInfor = dataUser;
     },
   },
 });
