@@ -65,7 +65,7 @@ const route = useRouter();
 const getAccess = async () => {
   try {
     const accessToken = await getAccessToken({});
-    store.saveAccessTTk(accessToken);
+    await store.saveAccessTTk(accessToken);
   } catch (error) {
     // xử lý khi gọi api thất bại
     console.log(error);
@@ -75,17 +75,18 @@ const getAccess = async () => {
 const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
+    await getAccess();
     getPhoneNumber({
       success: async (data) => {
         let { token } = data;
-        store.saveToken(token);
+        await store.saveToken(token);
       },
       fail: (error) => {
         // Xử lý khi gọi api thất bại
         console.log(error);
       },
     });
-    getAccess();
+
     const dataUser = {
       ...userInfo,
       accessTk: store.accessToken,
