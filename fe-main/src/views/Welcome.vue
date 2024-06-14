@@ -72,7 +72,7 @@ const getAccess = async () => {
   }
 };
 
-const getPhone = () => {
+const getPhone = async () => {
   getPhoneNumber({
     success: async (data) => {
       let { token } = data;
@@ -113,7 +113,7 @@ authorize({
     if (data.code) {
       closeMiniApp();
     } else if (!data.code) {
-      getPhone();
+      await getPhone();
       await getAccess();
       await getUser();
     }
