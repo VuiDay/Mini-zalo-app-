@@ -39,40 +39,41 @@ const store = window.$stores.user;
 
 const route = useRouter();
 
-getUserInfo({
-  success: async (data) => {
-    // xử lý khi gọi api thành công
-    const { userInfo } = data;
-    // getPhoneNumber({
-    //   success: async (data) => {
-    //     let { token } = data;
-    //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
-    //   },
-    //   fail: (error) => {
-    //     console.log(error);
-    //   },
-    // });
-    await store.saveInforUser(userInfo);
-    console.log(userInfo);
-    if (store.userInfor) {
-      route.push("/order-vehicle");
-    }
-  },
-  fail: (error) => {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  },
-});
+// getUserInfo({
+//   success: async (data) => {
+//     // xử lý khi gọi api thành công
+//     const { userInfo } = data;
+//     // getPhoneNumber({
+//     //   success: async (data) => {
+//     //     let { token } = data;
+//     //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
+//     //   },
+//     //   fail: (error) => {
+//     //     console.log(error);
+//     //   },
+//     // });
+//     await store.saveInforUser(userInfo);
+//     console.log(userInfo);
+//     if (store.userInfor) {
+//       route.push("/order-vehicle");
+//     }
+//   },
+//   fail: (error) => {
+//     // xử lý khi gọi api thất bại
+//     console.log(error);
+//   },
+// });
 
 const getSettings = async () => {
   try {
     const data = await getSetting({});
-    console.log(data);
     if (data.scope.userInfo) {
       getUserInfo({
         success: async (data) => {
           // xử lý khi gọi api thành công
+          console.log(data);
           const { userInfo } = data;
+          console.log(userInfo);
           await store.saveInforUser(userInfo);
           if (store.userInfor) {
             route.push("/order-vehicle");
@@ -92,7 +93,7 @@ const getSettings = async () => {
 getSettings();
 
 authorize({
-  scopes: ["scope.userInfo"],
+  scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
     // xử lý khi gọi api thành công
     console.log(data, "123");

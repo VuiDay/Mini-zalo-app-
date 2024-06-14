@@ -15,7 +15,7 @@
             line-height: 20px;
           "
         >
-          Chào mừng trở lại,
+          Chào bạn,
         </p>
         <p
           style="
@@ -31,7 +31,7 @@
         </p>
       </div>
       <div>
-        <Avatar :image="userName.avatar" shape="circle" />
+        <Avatar :image="userName.avatar" shape="circle" size="large" />
       </div>
     </div>
   </div>
