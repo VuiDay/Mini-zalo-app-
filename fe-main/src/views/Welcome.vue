@@ -62,10 +62,36 @@ const route = useRouter();
 //   },
 // });
 
+const getAccess = async () => {
+  try {
+    const accessToken = await getAccessToken({});
+    store.saveAccessTTk(accessToken);
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  }
+};
+
 const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
-    await store.saveInforUser(userInfo);
+    getPhoneNumber({
+      success: async (data) => {
+        let { token } = data;
+        store.saveToken(token);
+      },
+      fail: (error) => {
+        // Xử lý khi gọi api thất bại
+        console.log(error);
+      },
+    });
+    getAccess();
+    const dataUser = {
+      ...userInfo,
+      accessTk: store.accessToken,
+      tk: store.token,
+    };
+    await store.saveInforUser(dataUser);
     if (store.userInfor) {
       route.push("/order-vehicle");
     }
@@ -83,29 +109,6 @@ const closeMiniApp = async () => {
   }
 };
 
-const access = async () => {
-  try {
-    const accessToken = await getAccessToken({});
-    store.accessToken = accessToken;
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-};
-
-const getPhone = async () => {
-  getPhoneNumber({
-    success: async (data) => {
-      let { token } = data;
-      store.token = token;
-    },
-    fail: (error) => {
-      // Xử lý khi gọi api thất bại
-      console.log(error);
-    },
-  });
-};
-
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
@@ -113,8 +116,6 @@ authorize({
       closeMiniApp();
     } else if (!data.code) {
       getUser();
-      access();
-      getPhone();
     }
   },
   fail: (error) => {

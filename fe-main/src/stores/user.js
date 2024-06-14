@@ -9,10 +9,15 @@ export const userStore = defineStore("user", {
   getters: {},
   actions: {
     async saveInforUser(data) {
-      console.log(data, this.accessToken, this.token, "1111111");
       const dataUser = { ...data, accTk: this.accessToken, tk: this.token };
       console.log(dataUser);
       this.userInfor = data;
+    },
+    async saveAccessTTk(data) {
+      this.accessToken = data;
+    },
+    async saveToken(data) {
+      this.token = data;
     },
   },
 });
