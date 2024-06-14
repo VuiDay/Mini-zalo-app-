@@ -3,12 +3,37 @@ import { ref } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
+import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const value = ref(null);
-const term = ref(false);
+
+const handleClick = () => {
+  // requestCameraPermission({
+  //   success: ({ userAllow, message }) => {
+  //     if (userAllow) {
+  //       chooseImage({
+  //         sourceType: ["album", "camera"],
+  //         cameraType: "back",
+  //         success: ({ filePaths, tempFiles }) => {
+  //           // xử lý khi gọi api thành công
+  //         },
+  //         fail: (error) => {
+  //           // xử lý khi gọi api thất bại
+  //           console.log(error);
+  //         },
+  //       });
+  //     }
+  //   },
+  //   fail: (err) => {
+  //     // xử lý khi gọi api thất bại
+  //     console.log(err);
+  //   },
+  // });
+};
 </script>
+
 <template>
-  <section class="px-6 py-[18px]">
+  <section class="px-6 pb-[18px] mt-[50px]">
     <div
       class="w-9 h-9 rounded-full bg-[#2ECB70] flex justify-center items-center mb-[15px]"
       onclick="history.back()"
@@ -51,20 +76,14 @@ const term = ref(false);
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
       <Dropdown />
-      <InputText
-        type="text"
-        v-model="value"
-        unstyled="true"
-        placeholder="Mật khẩu"
-        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-      />
-      <InputText
-        type="text"
-        v-model="value"
-        unstyled="true"
-        placeholder="Xác nhận mật khẩu"
-        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-      />
+      <div class="grid grid-cols-2 gap-6 image">
+        <button type="button" class="" @click="handleClick">
+          Ảnh mặt trước cccd
+        </button>
+        <button type="button" class="">Ảnh mặt sau cccd</button>
+        <button type="button" class="h-[54px]">Ảnh bằng lái (Mặt trước)</button>
+        <button type="button" class="h-[54px]">Ảnh bằng lái (Mặt sau)</button>
+      </div>
       <div class="flex items-center">
         <CheckBox></CheckBox>
       </div>
@@ -73,4 +92,8 @@ const term = ref(false);
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.image button {
+  @apply bg-[#F0F5F5] h-[50px] border-none text-[#97A69D] p-2 rounded-md w-full overflow-hidden text-sm;
+}
+</style>
