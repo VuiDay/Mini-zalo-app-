@@ -87,7 +87,7 @@ const closeMiniApp = async () => {
 const access = async () => {
   try {
     const accessToken = await getAccessToken({});
-    console.log(accessToken);
+    console.log(accessToken, "access");
   } catch (error) {
     // xử lý khi gọi api thất bại
     console.log(error);
@@ -98,7 +98,7 @@ const getPhone = () => {
   getPhoneNumber({
     success: async (data) => {
       let { token } = data;
-      console.log(token);
+      console.log(token, "token");
     },
     fail: (error) => {
       // Xử lý khi gọi api thất bại
