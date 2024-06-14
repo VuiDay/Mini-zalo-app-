@@ -1,5 +1,5 @@
 <template>
-  <RouterLink to="/order-vehicle">
+  <RouterLink to="#">
     <img
       src="../assets/image/Group 1171275006.png"
       width="100%"
