@@ -93,7 +93,7 @@ const access = async () => {
   }
 };
 
-const getPhone = () => {
+const getPhone = async () => {
   getPhoneNumber({
     success: async (data) => {
       let { token } = data;
