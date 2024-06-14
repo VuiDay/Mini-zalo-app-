@@ -42,18 +42,9 @@ const route = useRouter();
 // getUserInfo({
 //   success: async (data) => {
 //     // xử lý khi gọi api thành công
+//     console.log(data);
 //     const { userInfo } = data;
-//     // getPhoneNumber({
-//     //   success: async (data) => {
-//     //     let { token } = data;
-//     //     await store.saveInforUser({ ...userInfo, tokenPhone: token });
-//     //   },
-//     //   fail: (error) => {
-//     //     console.log(error);
-//     //   },
-//     // });
 //     await store.saveInforUser(userInfo);
-//     console.log(userInfo);
 //     if (store.userInfor) {
 //       route.push("/order-vehicle");
 //     }
@@ -64,39 +55,26 @@ const route = useRouter();
 //   },
 // });
 
-const getSettings = async () => {
+const getUser = async () => {
   try {
-    const data = await getSetting({});
-    if (data.scope.userInfo) {
-      getUserInfo({
-        success: async (data) => {
-          // xử lý khi gọi api thành công
-          console.log(data);
-          const { userInfo } = data;
-          console.log(userInfo);
-          await store.saveInforUser(userInfo);
-          if (store.userInfor) {
-            route.push("/order-vehicle");
-          }
-        },
-        fail: (error) => {
-          // xử lý khi gọi api thất bại
-          console.log(error);
-        },
-      });
+    const { userInfo } = await getUserInfo({});
+    console.log(userInfo);
+    await store.saveInforUser(userInfo);
+    if (store.userInfor) {
+      route.push("/order-vehicle");
     }
   } catch (error) {
-    // xử lý khi gọi api thất bại
     console.log(error);
   }
 };
-getSettings();
 
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
     // xử lý khi gọi api thành công
-    console.log(data, "123");
+    if (data?.scope.userInfo) {
+      getUser();
+    }
   },
   fail: (error) => {
     // xử lý khi gọi api thất bại
