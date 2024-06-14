@@ -33,7 +33,13 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getUserInfo, getSetting, authorize, closeApp } from "zmp-sdk/apis";
+import {
+  getUserInfo,
+  getSetting,
+  authorize,
+  closeApp,
+  getAccessToken,
+} from "zmp-sdk/apis";
 
 const store = window.$stores.user;
 
@@ -77,6 +83,16 @@ const closeMiniApp = async () => {
   }
 };
 
+const test = async () => {
+  try {
+    const accessToken = await getAccessToken({});
+    console.log(accessToken);
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  }
+};
+
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
@@ -84,6 +100,7 @@ authorize({
       closeMiniApp();
     } else if (!data.code) {
       getUser();
+      test();
     }
   },
   fail: (error) => {

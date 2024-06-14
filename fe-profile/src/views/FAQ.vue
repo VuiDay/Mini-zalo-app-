@@ -8,8 +8,6 @@
 <script setup>
 import Header from "../components/Header.vue";
 import Accordion from "../components/Accordion.vue";
-const store = window.$stores.user;
-console.log(store.userInfor);
 </script>
 
 <style scoped>
