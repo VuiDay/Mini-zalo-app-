@@ -72,21 +72,23 @@ const getAccess = async () => {
   }
 };
 
+const getPhone = () => {
+  getPhoneNumber({
+    success: async (data) => {
+      let { token } = data;
+      console.log(token, "token");
+      await store.saveToken(token);
+    },
+    fail: (error) => {
+      // Xử lý khi gọi api thất bại
+      console.log(error);
+    },
+  });
+};
+
 const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
-    await getAccess();
-    await getPhoneNumber({
-      success: async (data) => {
-        let { token } = data;
-        console.log(token, "token");
-        await store.saveToken(token);
-      },
-      fail: (error) => {
-        // Xử lý khi gọi api thất bại
-        console.log(error);
-      },
-    });
     await store.saveInforUser(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
@@ -107,11 +109,13 @@ const closeMiniApp = async () => {
 
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
-  success: (data) => {
+  success: async (data) => {
     if (data.code) {
       closeMiniApp();
     } else if (!data.code) {
-      getUser();
+      getPhone();
+      await getAccess();
+      await getUser();
     }
   },
   fail: (error) => {
