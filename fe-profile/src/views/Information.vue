@@ -3,7 +3,12 @@ import { ref } from "vue";
 import Info from "../components/Info.vue";
 import SideBar from "../components/SideBar.vue";
 
-const name = ref("Nguyen Van");
+const store = window.$stores.user;
+const name = "oke";
+// const userInfor = store?.userInfor;
+// const name = userInfor?.name;
+// const avatar = userInfor?.avatar;
+console.log("store:", store);
 </script>
 
 <template>
