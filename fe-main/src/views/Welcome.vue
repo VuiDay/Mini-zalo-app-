@@ -79,6 +79,7 @@ const getUser = async () => {
     getPhoneNumber({
       success: async (data) => {
         let { token } = data;
+        console.log(token, "token");
         await store.saveToken(token);
       },
       fail: (error) => {
@@ -86,7 +87,6 @@ const getUser = async () => {
         console.log(error);
       },
     });
-
     const dataUser = {
       ...userInfo,
       accessTk: store.accessToken,
