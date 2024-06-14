@@ -5,6 +5,7 @@ export const userStore = defineStore("user", {
     userInfor: [],
     accessToken: "",
     token: "",
+    data: "",
   }),
   getters: {},
   actions: {
@@ -12,12 +13,17 @@ export const userStore = defineStore("user", {
       this.accessToken = data;
     },
     async saveToken(data) {
+      const dataUser = {
+        ...this.data,
+        accessTk: this.accessToken,
+        tk: data,
+      };
       this.token = data;
+      this.userInfor = dataUser;
+      console.log(dataUser);
     },
     async saveInforUser(data) {
-      const dataUser = { ...data, accessTk: this.accessToken, tk: this.token };
-      console.log(dataUser);
-      this.userInfor = dataUser;
+      this.data = data;
     },
   },
 });
