@@ -80,12 +80,11 @@ const closeMiniApp = async () => {
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
-    // if (data.code) {
-    //   closeMiniApp();
-    // } else if (!data.code) {
-    //   getUser();
-    // }
-    closeMiniApp();
+    if (data.code) {
+      closeMiniApp();
+    } else if (!data.code) {
+      getUser();
+    }
   },
   fail: (error) => {
     // xử lý khi gọi api thất bại
