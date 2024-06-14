@@ -72,6 +72,7 @@ authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: (data) => {
     // xử lý khi gọi api thành công
+    console.log(data, scope.userInfo);
     if (data?.scope.userInfo) {
       getUser();
     }
