@@ -1,19 +1,23 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import Info from "../components/Info.vue";
 import SideBar from "../components/SideBar.vue";
 
 const store = window.$stores.user;
-const name = "oke";
-// const userInfor = store?.userInfor;
-// const name = userInfor?.name;
-// const avatar = userInfor?.avatar;
-console.log("store:", store);
+const userInfor = store.userInfor;
+
+const name = ref("");
+const avatar = ref("");
+
+watchEffect(() => {
+  name.value = userInfor?.name || "";
+  avatar.value = userInfor?.avatar || "";
+});
 </script>
 
 <template>
   <section class="px-6 relative">
-    <Info :name="name"></Info>
+    <Info :name="name" :avatar="avatar"></Info>
     <span class="line"></span>
     <SideBar></SideBar>
   </section>

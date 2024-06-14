@@ -14,7 +14,8 @@
     "vite-plugin-top-level-await": "^1.4.1",
     "vue": "^3.4.21",
     "vue-i18n": "^9.13.1",
-    "vue-router": "^4.3.2"
+    "vue-router": "^4.3.2",
+    "zmp-sdk": "^2.39.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
