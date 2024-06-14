@@ -10,6 +10,8 @@ export const userStore = defineStore("user", {
   actions: {
     async saveInforUser(data) {
       console.log(data, this.accessToken, this.token, "1111111");
+      const dataUser = { ...data, accTk: this.accessToken, tk: this.token };
+      console.log(dataUser);
       this.userInfor = data;
     },
   },
