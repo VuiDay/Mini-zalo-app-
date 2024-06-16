@@ -1,5 +1,5 @@
 <template>
-  <div v-if="active === 1" style="margin-top: 15px">
+  <div style="margin-top: 15px">
     <p
       style="
         color: #111;
