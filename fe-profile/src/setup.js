@@ -47,5 +47,5 @@ if (window.$stores) {
   //     component: shallowRef(Product),
   //     role: ["owner", "manage", "staff", "user"]
   // });
-  window.$stores.profileStore = useProfileStore;
+  window.$stores.profile = useProfileStore;
 }

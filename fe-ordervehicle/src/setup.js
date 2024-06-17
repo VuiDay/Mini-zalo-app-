@@ -1,6 +1,6 @@
 import en from "@/languages/en";
 import vi from "@/languages/vi";
-import { useOrderVehicleStore } from "./stores/orderVehicle";
+import { useOrderVehicleStore } from "@/stores/orderVehicle";
 // import './style.css';
 
 if (window.$i18n) {
