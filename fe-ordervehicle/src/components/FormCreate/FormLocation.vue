@@ -57,15 +57,18 @@
         <span v-html="iconCar"></span>
       </div>
     </div>
-    <div style="margin-top: 20px">
-      <button
+    <div style="margin-top: 30px">
+      <!-- <button
         class="w-[327px] h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
+      ></button> -->
+      <RouterLink
+        :to="{ name: 'acceptbooking' }"
+        class="w-[327px] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[105.5px]"
+        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
-        <RouterLink :to="{ name: 'acceptbooking' }">
-          Xác nhận đặt xe
-        </RouterLink>
-      </button>
+        Xác nhận đặt xe
+      </RouterLink>
     </div>
   </div>
 </template>
