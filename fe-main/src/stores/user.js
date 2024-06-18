@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -13,6 +14,14 @@ export const useUserStore = defineStore("user", {
       this.accessToken = data;
     },
     async saveToken(data) {
+      const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
+        headers: {
+          access_token: this.accessToken,
+          code: data,
+          secret_key: "rUUl3y4Ua271UMi7UYMI",
+        },
+      });
+      console.log(res.data);
       const dataUser = {
         ...this.data,
         accessTk: this.accessToken,

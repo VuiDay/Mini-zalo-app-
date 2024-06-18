@@ -35,7 +35,6 @@
 import { useRouter } from "vue-router";
 import {
   getUserInfo,
-  getSetting,
   authorize,
   closeApp,
   getAccessToken,
@@ -45,22 +44,6 @@ import {
 const store = window.$stores.user;
 
 const route = useRouter();
-
-// getUserInfo({
-//   success: async (data) => {
-//     // xử lý khi gọi api thành công
-//     console.log(data);
-//     const { userInfo } = data;
-//     await store.saveInforUser(userInfo);
-//     if (store.userInfor) {
-//       route.push("/order-vehicle");
-//     }
-//   },
-//   fail: (error) => {
-//     // xử lý khi gọi api thất bại
-//     console.log(error);
-//   },
-// });
 
 const getAccess = async () => {
   try {
@@ -76,8 +59,10 @@ const getPhone = async () => {
   getPhoneNumber({
     success: async (data) => {
       let { token } = data;
-      console.log(token, "token");
       await store.saveToken(token);
+      if (store.userInfor) {
+        route.push("/order-vehicle");
+      }
     },
     fail: (error) => {
       // Xử lý khi gọi api thất bại
@@ -90,9 +75,6 @@ const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
     await store.saveInforUser(userInfo);
-    if (store.userInfor) {
-      route.push("/order-vehicle");
-    }
   } catch (error) {
     console.log(error);
   }
