@@ -33,7 +33,14 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { getUserInfo, getSetting, authorize, closeApp } from "zmp-sdk/apis";
+import {
+  getUserInfo,
+  getSetting,
+  authorize,
+  closeApp,
+  getAccessToken,
+  getPhoneNumber,
+} from "zmp-sdk/apis";
 
 const store = window.$stores.user;
 
@@ -55,10 +62,33 @@ const route = useRouter();
 //   },
 // });
 
+const getAccess = async () => {
+  try {
+    const accessToken = await getAccessToken({});
+    await store.saveAccessTTk(accessToken);
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  }
+};
+
+const getPhone = async () => {
+  getPhoneNumber({
+    success: async (data) => {
+      let { token } = data;
+      console.log(token, "token");
+      await store.saveToken(token);
+    },
+    fail: (error) => {
+      // Xử lý khi gọi api thất bại
+      console.log(error);
+    },
+  });
+};
+
 const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
-    console.log(userInfo);
     await store.saveInforUser(userInfo);
     if (store.userInfor) {
       route.push("/order-vehicle");
@@ -79,11 +109,13 @@ const closeMiniApp = async () => {
 
 authorize({
   scopes: ["scope.userInfo", "scope.userPhonenumber"],
-  success: (data) => {
+  success: async (data) => {
     if (data.code) {
       closeMiniApp();
     } else if (!data.code) {
-      getUser();
+      await getPhone();
+      await getAccess();
+      await getUser();
     }
   },
   fail: (error) => {

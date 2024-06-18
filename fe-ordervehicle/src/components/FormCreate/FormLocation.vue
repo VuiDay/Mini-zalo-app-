@@ -1,103 +1,80 @@
 <template>
-  <div style="padding: 36px 24px 0 24px" class="relative">
-    <div class="flex items-center">
-      <p
-        onclick="history.back()"
+  <div class="" style="margin-top: 15px">
+    <div class="flex flex-col" style="margin-bottom: 10px">
+      <label
+        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        for=""
+        >Vị trí hiện tại</label
+      >
+      <input
+        type="text"
+        value="hehehe"
         style="
-          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-          padding: 14px 20px;
-          border-radius: 50px;
+          background-color: #f0f5f5;
+          padding: 15px 19px 15px 16px;
+          margin-top: 5px;
         "
-      >
-        <img src="/arrowleft.svg" alt="" />
-      </p>
-      <p
-        class="text-[#111] ml-[10px] text-[20px] font-bold leading-normal tracking-[-0.8px]"
-      >
-        Đặt xe
-      </p>
+      />
     </div>
-
-    <div v-if="active === 0" class="" style="margin-top: 15px">
-      <div class="flex flex-col" style="margin-bottom: 10px">
-        <label
-          class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
-          for=""
-          >Vị trí hiện tại</label
-        >
-        <input
-          type="text"
-          value="hehehe"
-          style="
-            background-color: #f0f5f5;
-            padding: 15px 19px 15px 16px;
-            margin-top: 5px;
-          "
-        />
+    <div class="flex flex-col" style="margin-bottom: 10px">
+      <label
+        for=""
+        style="
+          color: #77869e;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          letter-spacing: 0.239px;
+        "
+        >Điểm đến</label
+      >
+      <input
+        type="text"
+        value="hehehe"
+        style="
+          background-color: #f0f5f5;
+          padding: 15px 19px 15px 16px;
+          margin-top: 5px;
+        "
+      />
+    </div>
+    <div class="flex flex-col" style="margin-bottom: 10px">
+      <label
+        for=""
+        style="
+          color: #77869e;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          letter-spacing: 0.239px;
+        "
+        >Chọn phương tiện của bạn</label
+      >
+      <div class="flex justify-between mt-2">
+        <span v-html="iconBike" @click=""></span>
+        <span v-html="iconCar"></span>
       </div>
-      <div class="flex flex-col" style="margin-bottom: 10px">
-        <label
-          for=""
-          style="
-            color: #77869e;
-            font-size: 13px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: 0.239px;
-          "
-          >Điểm đến</label
-        >
-        <input
-          type="text"
-          value="hehehe"
-          style="
-            background-color: #f0f5f5;
-            padding: 15px 19px 15px 16px;
-            margin-top: 5px;
-          "
-        />
-      </div>
-      <div class="flex flex-col" style="margin-bottom: 10px">
-        <label
-          for=""
-          style="
-            color: #77869e;
-            font-size: 13px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-            letter-spacing: 0.239px;
-          "
-          >Chọn phương tiện của bạn</label
-        >
-        <div class="flex justify-between mt-2">
-          <span v-html="iconBike" @click=""></span>
-          <span v-html="iconCar"></span>
-        </div>
-      </div>
-      <div style="margin-top: 20px">
-        <button
-          style="
-            width: 327px;
-            height: 56px;
-            border-radius: 50px;
-            background: #2ecb70;
-            box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25);
-            color: white;
-          "
-          @click="() => (active = 1)"
-        >
-          Xác nhận đặt xe
-        </button>
-      </div>
+    </div>
+    <div style="margin-top: 30px">
+      <!-- <button
+        class="w-[327px] h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
+        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
+      ></button> -->
+      <RouterLink
+        :to="{ name: 'acceptbooking' }"
+        class="w-[327px] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[105.5px]"
+        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
+      >
+        Xác nhận đặt xe
+      </RouterLink>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const active = ref(0);
 
 const iconCar = `<svg xmlns="http://www.w3.org/2000/svg" width="150" height="97" viewBox="0 0 150 97" fill="none">
   <g clip-path="url(#clip0_4005_5233)">

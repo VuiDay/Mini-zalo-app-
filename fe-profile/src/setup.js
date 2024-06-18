@@ -1,4 +1,5 @@
 import "./style.css";
+import { useProfileStore } from "./stores/profileStrore";
 
 if (window.$router) {
   const addedRoute = window.$router.getRoutes();
@@ -36,4 +37,15 @@ if (window.$router) {
       window.$router.addRoute(r);
     }
   });
+}
+
+if (window.$stores) {
+  // window.$stores.layout.tab.push({
+  //     label: window.remoteApp["orderVehicle"].label || "Sản phẩm",
+  //     icon: window.remoteApp["orderVehicle"].icon || "pi pi-inbox",
+  //     position: window.remoteApp["orderVehicle"].position,
+  //     component: shallowRef(Product),
+  //     role: ["owner", "manage", "staff", "user"]
+  // });
+  window.$stores.profile = useProfileStore;
 }
