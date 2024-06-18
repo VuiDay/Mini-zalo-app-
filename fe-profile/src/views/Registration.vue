@@ -3,15 +3,16 @@ import { ref } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
-import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
+// import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
-const store = window.$stores.profile;
+// const store = window.$stores.profile;
 
 const firstName = ref(null);
 const lastName = ref(null);
 const email = ref(null);
 const phoneNumber = ref(null);
 const city = ref(null);
+const term = ref(false);
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -22,13 +23,30 @@ const handleSubmit = async (e) => {
     email: email.value,
     phoneNumber: phoneNumber.value,
     city: city.value,
+    term: term.value,
   };
+  if (
+    formData.firstName === null ||
+    formData.lastName === null ||
+    formData.email === null ||
+    formData.phoneNumber === null
+  ) {
+    alert("Điền đầy đủ");
+    return;
+  }
+  if (formData.term === false) {
+    alert("Tích");
+    return;
+  }
   // await store.setFormRegis(formData);
   console.log("Form Data:", formData);
 };
 
 const handleSelectedUpdate = (data) => {
   city.value = data;
+};
+const handleUpdateTerm = (data) => {
+  term.value = data;
 };
 </script>
 
@@ -81,9 +99,9 @@ const handleSelectedUpdate = (data) => {
       />
 
       <div class="flex items-center">
-        <CheckBox></CheckBox>
+        <CheckBox @update:term="handleUpdateTerm"></CheckBox>
       </div>
-      <Button type="submit" to="/authen-card">Tiếp tục</Button>
+      <Button type="submit">Tiếp tục</Button>
     </form>
   </section>
 </template>

@@ -10,7 +10,11 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
       v-if="props.avatar"
       class="w-[72px] h-[72px] font-semibold rounded-full flex justify-center items-center stand-for-name"
     >
-      <img :src="avatar" :alt="standForName" />
+      <img
+        :src="avatar"
+        :alt="standForName"
+        class="w-full h-full object-cover"
+      />
     </span>
     <span
       v-else
