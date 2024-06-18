@@ -3,12 +3,37 @@ import { ref } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
+import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
-const value = ref(null);
-const term = ref(false);
+const store = window.$stores.profile;
+
+const firstName = ref(null);
+const lastName = ref(null);
+const email = ref(null);
+const phoneNumber = ref(null);
+const city = ref(null);
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    phoneNumber: phoneNumber.value,
+    city: city.value,
+  };
+  // await store.setFormRegis(formData);
+  console.log("Form Data:", formData);
+};
+
+const handleSelectedUpdate = (data) => {
+  city.value = data;
+};
 </script>
+
 <template>
-  <section class="px-6 py-[18px]">
+  <section class="px-6 pb-[18px] mt-[50px]">
     <div
       class="w-9 h-9 rounded-full bg-[#2ECB70] flex justify-center items-center mb-[15px]"
       onclick="history.back()"
@@ -19,18 +44,18 @@ const term = ref(false);
     <p class="font-normal text-[13px] text-[#111]">
       Vui lòng điền thông tin vào form dưới đây
     </p>
-    <form class="pt-[25px] flex flex-col gap-[25px]">
+    <form class="pt-[25px] flex flex-col gap-[25px]" @submit="handleSubmit">
       <span class="flex gap-6">
         <InputText
           type="text"
-          v-model="value"
+          v-model="firstName"
           unstyled="true"
           placeholder="Họ"
           class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
         />
         <InputText
           type="text"
-          v-model="value"
+          v-model="lastName"
           unstyled="true"
           placeholder="Tên"
           class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
@@ -38,37 +63,27 @@ const term = ref(false);
       </span>
       <InputText
         type="text"
-        v-model="value"
+        v-model="email"
         unstyled="true"
         placeholder="Email"
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
       <InputText
         type="text"
-        v-model="value"
+        v-model="phoneNumber"
         unstyled="true"
         placeholder="Số điện thoại"
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
-      <Dropdown />
-      <InputText
-        type="text"
-        v-model="value"
-        unstyled="true"
-        placeholder="Mật khẩu"
-        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
+      <Dropdown
+        placeholder="Chọn tỉnh thành"
+        @update:selected="handleSelectedUpdate"
       />
-      <InputText
-        type="text"
-        v-model="value"
-        unstyled="true"
-        placeholder="Xác nhận mật khẩu"
-        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-      />
+
       <div class="flex items-center">
         <CheckBox></CheckBox>
       </div>
-      <Button>Tiếp tục</Button>
+      <Button type="submit" to="/authen-card">Tiếp tục</Button>
     </form>
   </section>
 </template>

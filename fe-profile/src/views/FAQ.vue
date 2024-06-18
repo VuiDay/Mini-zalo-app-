@@ -12,6 +12,6 @@ import Accordion from "../components/Accordion.vue";
 
 <style scoped>
 .views-wrap {
-  padding: 18px 24px;
+  padding: 50px 24px 18px;
 }
 </style>

@@ -1,10 +1,15 @@
-<script setup></script>
+<script setup>
+const props = defineProps(["type", "to"]);
+</script>
 <template>
   <button
-    type="submit"
+    :type="props.type ? props.type : 'submit'"
     class="rounded-full w-full py-3 bg-[#2ECB70] text-center text-white text-[15px] font-semibold leading-[30px] tracking-wider button"
   >
-    <slot></slot>
+    <router-link v-if="props.to" :to="props.to" class="w-full h-full block"
+      ><slot></slot
+    ></router-link>
+    <slot v-else></slot>
   </button>
 </template>
 
