@@ -24,11 +24,11 @@ export const useUserStore = defineStore("user", {
         ...this.data,
         phone: res.data.data.number,
       };
-      const data = await axios.post(
+      const user = await axios.post(
         "https://be-mini-app.minhquancao0.workers.dev/api/user/user-current",
         dataUser
       );
-      console.log(data.data);
+      console.log(user.data);
       this.userInfor = dataUser;
       console.log(dataUser);
     },
