@@ -1,5 +1,5 @@
 import "./style.css";
-import { useProfileStore } from "./stores/profileStrore";
+import { useProfileStore } from "@/stores/profileStrore";
 
 if (window.$router) {
   const addedRoute = window.$router.getRoutes();
