@@ -5,7 +5,6 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     userInfor: [],
     accessToken: "",
-    token: "",
     data: "",
   }),
   getters: {},
@@ -21,12 +20,15 @@ export const useUserStore = defineStore("user", {
           secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
-      console.log(res.data);
       const dataUser = {
         ...this.data,
         phone: res.data.data.number,
       };
-      this.token = data;
+      const data = await axios.post(
+        "https://be-mini-app.minhquancao0.workers.dev/api/user/user-current",
+        dataUser
+      );
+      console.log(data.data);
       this.userInfor = dataUser;
       console.log(dataUser);
     },
