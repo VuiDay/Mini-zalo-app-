@@ -1,32 +1,29 @@
 <script setup>
 import { onMounted, ref } from "vue";
+import Datas from "../utils/data.json";
 
 const isOpen = ref(false);
-// const selected = ref(null);
+const selected = ref(null);
 const list = ref();
+
+const emit = defineEmits(["update:selected"]);
 
 const props = defineProps({
   placeholder: String,
-  selected: Object,
 });
-const emits = defineEmits(["update:selected"]);
-console.log("selected :", props.selected);
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
 const selectedItem = (data) => {
-  emits("update:selected", data);
+  selected.value = data.name;
   isOpen.value = false;
+  emit("update:selected", data.name);
 };
 
 onMounted(async () => {
-  const result = await fetch("https://esgoo.net/api-tinhthanh/1/0.htm")
-    .then((data) => data.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
-  list.value = result.data;
+  list.value = Datas.data;
 });
 </script>
 
@@ -37,7 +34,7 @@ onMounted(async () => {
       @click="toggleDropdown"
       class="w-full bg-[#F0F5F5] h-[50px] text-[#97A69D] rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#97A69D] transition duration-150 ease-in-out flex justify-between items-center"
     >
-      {{ props.selected ? props.selected.name : props.placeholder }}
+      {{ selected ? selected : props.placeholder }}
       <img src="/down.svg" alt="" />
     </button>
     <div

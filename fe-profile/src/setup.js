@@ -30,6 +30,11 @@ if (window.$router) {
       name: "Registration",
       component: () => import("@/views/Registration.vue"),
     },
+    {
+      path: "/authen-card",
+      name: "AuthenCard",
+      component: () => import("@/views/AuthenCard.vue"),
+    },
   ];
   routes.forEach((r) => {
     const existed = addedRoute.find((r2) => r2.path === r.path);

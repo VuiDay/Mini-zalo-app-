@@ -1,7 +1,17 @@
 import { defineStore } from "pinia";
 
 export const useProfileStore = defineStore("profile", {
-  state: () => ({}),
+  state: () => ({
+    formRegisData: null,
+  }),
   getters: {},
-  actions: {},
+  actions: {
+    async setFormRegis(data) {
+      try {
+        this.formRegisData = data;
+      } catch (error) {
+        console.log("error :", error);
+      }
+    },
+  },
 });
