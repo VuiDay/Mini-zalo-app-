@@ -33,7 +33,7 @@
         >Chọn phương tiện của bạn</label
       >
       <div class="flex justify-between mt-2">
-        <img v-for="(vehicle, index) of vehicles" src="/Vhc/car.svg" alt="" />
+        <img v-for="(vehicle, index) of vehicles" :src="vehicle.icon" alt="" />
       </div>
     </div>
     <div style="margin-top: 30px">
@@ -64,6 +64,8 @@ const vehicles = [
     icon: "/Vhc/bike.svg",
   },
 ];
+const store = window.$stores.profile;
+console.log(store.test);
 </script>
 
 <style scoped>

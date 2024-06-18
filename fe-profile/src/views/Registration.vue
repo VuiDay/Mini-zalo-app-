@@ -3,7 +3,7 @@ import { ref } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
-import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
+// import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
 

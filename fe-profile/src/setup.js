@@ -1,5 +1,5 @@
 import "./style.css";
-import { useProfileStore } from "@/stores/profileStrore";
+import { useProfileStore } from "./stores/profileStrore";
 
 if (window.$router) {
   const addedRoute = window.$router.getRoutes();
@@ -52,5 +52,5 @@ if (window.$stores) {
   //     component: shallowRef(Product),
   //     role: ["owner", "manage", "staff", "user"]
   // });
-  window.$stores.profile = useProfileStore;
+  window.$stores.profile = useProfileStore();
 }

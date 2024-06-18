@@ -26,6 +26,7 @@ export default defineConfig({
       },
       shared: {
         vue: {},
+        pinia: {},
       },
     }),
   ],
