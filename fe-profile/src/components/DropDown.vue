@@ -2,16 +2,22 @@
 import { onMounted, ref } from "vue";
 
 const isOpen = ref(false);
-const selected = ref(null);
+// const selected = ref(null);
 const list = ref();
-const placeholder = "Chọn thành phố";
+
+const props = defineProps({
+  placeholder: String,
+  selected: Object,
+});
+const emits = defineEmits(["update:selected"]);
+console.log("selected :", props.selected);
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
 const selectedItem = (data) => {
-  selected.value = data;
+  emits("update:selected", data);
   isOpen.value = false;
 };
 
@@ -31,7 +37,7 @@ onMounted(async () => {
       @click="toggleDropdown"
       class="w-full bg-[#F0F5F5] h-[50px] text-[#97A69D] rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#97A69D] transition duration-150 ease-in-out flex justify-between items-center"
     >
-      {{ selected ? selected.name : placeholder }}
+      {{ props.selected ? props.selected.name : props.placeholder }}
       <img src="/down.svg" alt="" />
     </button>
     <div

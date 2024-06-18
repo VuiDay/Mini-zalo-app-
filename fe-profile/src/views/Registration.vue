@@ -6,6 +6,12 @@ import Dropdown from "../components/DropDown.vue";
 import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const value = ref(null);
+const city = ref(null);
+console.log("city :", city);
+const district = ref(null);
+console.log("district :", district);
+const ward = ref(null);
+console.log("ward :", ward);
 
 const handleClick = () => {
   // requestCameraPermission({
@@ -44,7 +50,7 @@ const handleClick = () => {
     <p class="font-normal text-[13px] text-[#111]">
       Vui lòng điền thông tin vào form dưới đây
     </p>
-    <form class="pt-[25px] flex flex-col gap-[25px]">
+    <form class="pt-[25px] flex flex-col gap-[25px]" @submit="">
       <span class="flex gap-6">
         <InputText
           type="text"
@@ -75,7 +81,21 @@ const handleClick = () => {
         placeholder="Số điện thoại"
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
-      <Dropdown />
+      <Dropdown
+        placeholder="Chọn tỉnh thành"
+        :selected="city"
+        @update:selected="city = $event"
+      />
+      <Dropdown
+        placeholder="Chọn quận/huyện"
+        :selected="district"
+        @update:selected="district = $event"
+      />
+      <Dropdown
+        placeholder="Chọn thị xã"
+        :selected="ward"
+        @update:selected="ward = $event"
+      />
       <div class="grid grid-cols-2 gap-6 image">
         <button type="button" class="" @click="handleClick">
           Ảnh mặt trước cccd
