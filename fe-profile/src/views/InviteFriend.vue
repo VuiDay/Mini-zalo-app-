@@ -21,6 +21,6 @@ import Header from "../components/Header.vue";
 
 <style scoped>
 .views-wrap {
-  padding: 18px 24px 0px;
+  padding: 50px 24px 18px;
 }
 </style>

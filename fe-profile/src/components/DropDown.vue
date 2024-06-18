@@ -1,24 +1,30 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import Datas from "../utils/data.json";
 
 const isOpen = ref(false);
-const selectedCity = ref(null);
-const placeholder = "Select a City";
-const cities = [
-  { name: "New York", code: "NY" },
-  { name: "Rome", code: "RM" },
-  { name: "London", code: "LDN" },
-  { name: "Paris", code: "PRS" },
-];
+const selected = ref(null);
+const list = ref();
+
+const emit = defineEmits(["update:selected"]);
+
+const props = defineProps({
+  placeholder: String,
+});
 
 const toggleDropdown = () => {
   isOpen.value = !isOpen.value;
 };
 
-const selectCity = (city) => {
-  selectedCity.value = city;
+const selectedItem = (data) => {
+  selected.value = data.name;
   isOpen.value = false;
+  emit("update:selected", data.name);
 };
+
+onMounted(async () => {
+  list.value = Datas.data;
+});
 </script>
 
 <template>
@@ -26,9 +32,9 @@ const selectCity = (city) => {
     <button
       type="button"
       @click="toggleDropdown"
-      class="w-full bg-[#F0F5F5] h-[50px] text-[#97A69D] rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#97A69D] transition duration-150 ease-in-out flex justify-between items-center"
+      class="w-full bg-[#F0F5F5] h-[50px] text-[#97A69D] rounded-md py-2 px-4 focus:outline-none focus:ring-2 focus:ring-[#97A69D] transition duration-150 ease-in-out flex justify-between items-center"
     >
-      {{ selectedCity ? selectedCity.name : placeholder }}
+      {{ selected ? selected : props.placeholder }}
       <img src="/down.svg" alt="" />
     </button>
     <div
@@ -37,12 +43,12 @@ const selectCity = (city) => {
     >
       <ul class="max-h-60 overflow-auto rounded border border-gray-300">
         <li
-          v-for="city in cities"
-          :key="city.code"
-          @click="selectCity(city)"
+          v-for="item in list"
+          :key="item.id"
+          @click="selectedItem(item)"
           class="cursor-pointer py-2 px-4 hover:bg-[#E2E8F0] hover:text-[#111] text-[#97A69D] transition duration-150 ease-in-out"
         >
-          {{ city.name }}
+          {{ item.name }}
         </li>
       </ul>
     </div>
