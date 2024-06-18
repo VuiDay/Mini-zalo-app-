@@ -24,8 +24,7 @@ export const useUserStore = defineStore("user", {
       console.log(res.data);
       const dataUser = {
         ...this.data,
-        accessTk: this.accessToken,
-        tk: data,
+        phone: res.data.data.number,
       };
       this.token = data;
       this.userInfor = dataUser;

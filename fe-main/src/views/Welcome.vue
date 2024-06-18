@@ -95,9 +95,9 @@ authorize({
     if (data.code) {
       closeMiniApp();
     } else if (!data.code) {
-      await getPhone();
       await getAccess();
       await getUser();
+      await getPhone();
     }
   },
   fail: (error) => {
