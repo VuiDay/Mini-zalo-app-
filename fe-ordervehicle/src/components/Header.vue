@@ -8,7 +8,6 @@
         <p
           style="
             color: #111;
-            font-family: 'Anton', sans-serif;
             font-size: 12px;
             font-style: normal;
             font-weight: 500;
@@ -20,7 +19,6 @@
         <p
           style="
             color: #111;
-            font-family: 'Anton', sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 600;

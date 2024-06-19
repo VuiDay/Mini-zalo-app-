@@ -9,7 +9,7 @@
   font-family: Poppins, sans-serif;
 }
 
-:root {
+/* :root {
   --primary-50: 236 253 245;
   --primary-100: 209 250 229;
   --primary-200: 167 243 208;
@@ -76,6 +76,8 @@
     --primary-highlight-hover-opacity: 0.2;
   }
 }
+
+ */
 
 .router-link-exact-active {
   color: #2ecb70;

@@ -1,11 +1,9 @@
 <template>
-  <!-- <FormAccept></FormAccept> -->
-  <Map></Map>
+  <FormAccept></FormAccept>
 </template>
 
 <script setup>
 import FormAccept from "@/components/FormCreate/FormAccept.vue";
-import Map from "@/components/FormCreate/Map.vue";
 </script>
 
 <style scoped></style>

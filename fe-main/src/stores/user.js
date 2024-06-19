@@ -5,6 +5,7 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     userInfor: [],
     accessToken: "",
+    locateToken: "",
     data: "",
   }),
   getters: {},
@@ -15,7 +16,11 @@ export const useUserStore = defineStore("user", {
     async saveInforUser(data) {
       this.data = data;
     },
+    async saveLocate(data) {
+      this.locateToken = data;
+    },
     async saveToken(token) {
+      console.log(this.locateToken);
       const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
         headers: {
           access_token: this.accessToken,
