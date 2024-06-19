@@ -57,7 +57,7 @@ const getAccess = async () => {
 };
 
 const getPhone = async () => {
-  getPhoneNumber({
+  await getPhoneNumber({
     success: async (data) => {
       let { token } = data;
       await store.saveToken(token);
