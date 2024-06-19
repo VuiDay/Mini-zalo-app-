@@ -28,7 +28,7 @@ export const useUserStore = defineStore("user", {
       const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
         headers: {
           access_token: this.accessToken,
-          code: this.token.token,
+          code: this.token?.token,
           secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
