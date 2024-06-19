@@ -1,6 +1,6 @@
 <template>
   <div style="height: 600px; width: 800px">
-    <l-map ref="map" v-model:zoom="zoom" :center="[47.41322, -1.219482]">
+    <l-map ref="map" v-model:zoom="zoom" :center="center">
       <l-tile-layer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         layer-type="base"
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      zoom: 2,
+      zoom: 6, // Đặt mức zoom phù hợp để xem toàn cảnh Việt Nam
+      center: [14.0583, 108.2772], // Tọa độ tâm của Việt Nam
     };
   },
 };
