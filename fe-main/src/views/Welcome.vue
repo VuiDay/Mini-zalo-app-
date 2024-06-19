@@ -65,7 +65,6 @@ const getPhone = async () => {
       }
     },
     fail: (error) => {
-      // Xử lý khi gọi api thất bại
       console.log(error);
     },
   });

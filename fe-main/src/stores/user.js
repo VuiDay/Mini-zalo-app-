@@ -20,20 +20,20 @@ export const useUserStore = defineStore("user", {
         headers: {
           access_token: this.accessToken,
           code: token,
-          secret_key: "rUUl3y4Ua271UMi7UYMI",
+          secret_key: import.meta.env.VITE_SECRET_APP,
         },
       });
-      console.log(res.data, res.data.data.number);
+      console.log(res.data, res.data.data?.number);
       const dataUser = {
         ...this.data,
-        phone: res.data.data.number,
+        phone: res.data.data?.number,
       };
       const user = await axios.post(
         "https://be-mini-app.minhquancao0.workers.dev/api/user/user-current",
         dataUser
       );
       console.log(user.data);
-      this.userInfor = dataUser;
+      this.userInfor = user.data;
       console.log(dataUser);
     },
   },
