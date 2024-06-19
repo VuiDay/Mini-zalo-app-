@@ -12,18 +12,18 @@ export const useUserStore = defineStore("user", {
   actions: {
     async saveAccessTTk(data) {
       this.accessToken = data;
-      console.log(data);
+      console.log("access", data);
     },
     async saveInforUser(data) {
       this.data = data;
-      console.log(data);
+      console.log("infor user", data);
     },
     async saveLocate(data) {
       this.locateToken = data;
-      console.log(data);
+      console.log("locate", data);
     },
     async saveToken(token) {
-      console.log(token);
+      console.log("token", token);
       // const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
       //   headers: {
       //     access_token: this.accessToken,
