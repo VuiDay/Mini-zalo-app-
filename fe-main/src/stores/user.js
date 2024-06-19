@@ -41,10 +41,12 @@ export const useUserStore = defineStore("user", {
         ...this.dataUser,
         phone: res.data.data?.number,
       };
+      console.log(dataUser);
       const user = await axios.post(
         "https://be-mini-app.minhquancao0.workers.dev/api/user/user-current",
         dataUser.phone ? dataUser : fakeData
       );
+      console.log(user.data);
       this.userInfor = user.data;
       console.log(this.userInfor);
     },
