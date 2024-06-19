@@ -57,18 +57,6 @@ const getAccess = async () => {
 };
 
 const getPhone = async () => {
-  // await getPhoneNumber({
-  //   success: async (data) => {
-  //     let { token } = data;
-  //     await store.saveToken(token);
-  //     if (store.userInfor) {
-  //       route.push("/order-vehicle");
-  //     }
-  //   },
-  //   fail: (error) => {
-  //     console.log(error);
-  //   },
-  // });
   try {
     const tokenPhone = await getPhoneNumber({});
     await store.saveToken(tokenPhone);
@@ -82,16 +70,6 @@ const getPhone = async () => {
 };
 
 const getLocate = async () => {
-  // await getLocation({
-  //   success: async (data) => {
-  //     let { token } = data;
-  //     await store.saveLocate(token);
-  //   },
-  //   fail: (error) => {
-  //     // xử lý khi gọi api thất bại
-  //     console.log(error);
-  //   },
-  // });
   try {
     const tokenLocate = await getLocation({});
     await store.saveLocate(tokenLocate);
