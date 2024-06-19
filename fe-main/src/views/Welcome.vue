@@ -88,7 +88,7 @@ const closeMiniApp = async () => {
 };
 
 authorize({
-  scopes: ["scope.userLocation", "scope.userPhonenumber"],
+  scopes: ["scope.userInfo", "scope.userPhonenumber"],
   success: async (data) => {
     if (data.code) {
       closeMiniApp();
