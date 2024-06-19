@@ -1,11 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
 // import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
-// const store = window.$stores.profile;
+const store = window.$stores.profile;
 
 const firstName = ref(null);
 const lastName = ref(null);
@@ -14,9 +14,7 @@ const phoneNumber = ref(null);
 const city = ref(null);
 const term = ref(false);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
+const handleSubmit = async () => {
   const formData = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -38,8 +36,8 @@ const handleSubmit = async (e) => {
     alert("Tích");
     return;
   }
-  // await store.setFormRegis(formData);
-  console.log("Form Data:", formData);
+  await store.setFormRegis(formData);
+  window.$router.push("/authen-card");
 };
 
 const handleSelectedUpdate = (data) => {
@@ -62,7 +60,10 @@ const handleUpdateTerm = (data) => {
     <p class="font-normal text-[13px] text-[#111]">
       Vui lòng điền thông tin vào form dưới đây
     </p>
-    <form class="pt-[25px] flex flex-col gap-[25px]" @submit="handleSubmit">
+    <form
+      class="pt-[25px] flex flex-col gap-[25px]"
+      @submit.prevent="handleSubmit"
+    >
       <span class="flex gap-6">
         <InputText
           type="text"

@@ -1,7 +1,8 @@
 import en from "@/languages/en";
 import vi from "@/languages/vi";
-import { useOrderVehicleStore } from "@/stores/orderVehicle";
 // import './style.css';
+
+import { useOrderVehicleStore } from "./stores/orderVehicle";
 
 if (window.$i18n) {
   window.$i18n.setLocaleMessage("vi", vi);
@@ -61,5 +62,5 @@ if (window.$stores) {
   //     component: shallowRef(Product),
   //     role: ["owner", "manage", "staff", "user"]
   // });
-  window.$stores.orderVehicle = useOrderVehicleStore;
+  window.$stores.orderVehicle = useOrderVehicleStore();
 }

@@ -9,7 +9,7 @@
 //     // }, 5000);
 // }
 
-import { useHistoryStore } from "@/stores/historyStore";
+import { useHistoryStore } from "./stores/historyStore";
 
 if (window.$router) {
   const addedRoute = window.$router.getRoutes();
@@ -49,5 +49,5 @@ if (window.$stores) {
   //     component: shallowRef(Product),
   //     role: ["owner", "manage", "staff", "user"]
   // });
-  window.$stores.history = useHistoryStore;
+  window.$stores.history = useHistoryStore();
 }
