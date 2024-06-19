@@ -72,7 +72,7 @@ const getPhone = async () => {
 };
 
 const getLocate = async () => {
-  getLocation({
+  await getLocation({
     success: async (data) => {
       let { token } = data;
       await store.saveLocate(token);
