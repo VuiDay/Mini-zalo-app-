@@ -60,19 +60,6 @@ const getPhone = async () => {
   try {
     const tokenPhone = await getPhoneNumber({});
     await store.saveToken(tokenPhone);
-    if (store.userInfor) {
-      route.push("/order-vehicle");
-    }
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-};
-
-const getLocate = async () => {
-  try {
-    const tokenLocate = await getLocation({});
-    await store.saveLocate(tokenLocate);
   } catch (error) {
     // xử lý khi gọi api thất bại
     console.log(error);
@@ -83,6 +70,9 @@ const getUser = async () => {
   try {
     const { userInfo } = await getUserInfo({});
     await store.saveInforUser(userInfo);
+    if (store.userInfor) {
+      route.push("/order-vehicle");
+    }
   } catch (error) {
     console.log(error);
   }
@@ -105,7 +95,6 @@ authorize({
     } else if (!data.code) {
       await getAccess();
       await getUser();
-      await getLocate();
       await getPhone();
     }
   },
