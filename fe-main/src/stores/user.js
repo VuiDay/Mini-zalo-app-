@@ -28,11 +28,11 @@ export const useUserStore = defineStore("user", {
         name: "Cường Nè",
         phone: "84768921323",
       };
-      console.log("token", token, "access", this.accessToken);
+      console.log("token", token.token, "access", this.accessToken);
       const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
         headers: {
           access_token: this.accessToken,
-          code: token,
+          code: token.token,
           secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
