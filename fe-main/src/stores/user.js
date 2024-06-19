@@ -25,7 +25,7 @@ export const useUserStore = defineStore("user", {
         headers: {
           access_token: this.accessToken,
           code: token,
-          secret_key: import.meta.env.VITE_SECRET_APP,
+          secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
       console.log(res.data, res.data.data?.number);
