@@ -32,10 +32,11 @@ export const useUserStore = defineStore("user", {
       const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
         headers: {
           access_token: this.accessToken,
-          code: token.token,
+          code: token?.token,
           secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
+      console.log(res.data);
       const dataUser = {
         ...this.dataUser,
         phone: res.data.data?.number,
