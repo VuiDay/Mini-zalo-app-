@@ -6,6 +6,7 @@ import axios from "axios";
 const store = window.$stores.profile;
 
 const imageUrls = ref([null, null, null, null, null]);
+const flag = ref(false);
 
 // const onFileChange = (event, index) => {
 //   const file = event.target.files[0];
@@ -66,6 +67,8 @@ const handleSubmit = async () => {
     const data = store.formRegisData;
     console.log("data :", data);
 
+    flag.value = true;
+
     // await store.postRegisData(data);
     // window.$router.push("/profile");
   }
@@ -86,12 +89,6 @@ const handleSubmit = async () => {
     <div class="flex flex-col gap-6 image">
       <span v-for="(imageUrl, index) in imageUrls" :key="index">
         <label :for="index + 1" class="w-full h-full content-center block">
-          <img
-            v-if="imageUrl"
-            :src="imageUrl"
-            :alt="'Ảnh ' + (index + 1)"
-            class="h-full object-cover w-9"
-          />
           Ảnh {{ index + 1 }}
         </label>
         <input
@@ -102,6 +99,13 @@ const handleSubmit = async () => {
         />
       </span>
     </div>
+    <img
+      v-for="(imageUrl, index) in imageUrls"
+      v-if="flag"
+      :src="imageUrl"
+      :alt="'Ảnh ' + (index + 1)"
+      class="h-full object-cover w-9"
+    />
     <Button type="submit">Đăng ký</Button>
   </form>
 </template>
