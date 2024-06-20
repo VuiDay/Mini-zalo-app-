@@ -1,12 +1,17 @@
 <script setup>
 import Button from "../components/Button.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
-import axios from "axios";
 const store = window.$stores.profile;
 
 const imageUrls = ref([null, null, null, null, null]);
-const flag = ref(false);
+const placeholders = ref([
+  "Ảnh bằng lái xe (Mặt trước)",
+  "Ảnh bằng lái xe (Mặt trước)",
+  "Ảnh khuôn mặt",
+  "Ảnh CCCD (Mặt trước)",
+  "Ảnh CCCD (Mặt sau)",
+]);
 
 // const onFileChange = (event, index) => {
 //   const file = event.target.files[0];
@@ -69,9 +74,6 @@ const handleSubmit = async () => {
     const data = store.formRegisData;
     console.log("data :", data);
 
-    flag.value = true;
-    console.log("flag :", flag.value);
-
     // await store.postRegisData(data);
     // window.$router.push("/profile");
   }
@@ -91,30 +93,32 @@ const handleSubmit = async () => {
     <h2 class="font-semibold text-[#111] text-lg">Chụp ảnh</h2>
     <div class="flex flex-col gap-6 image">
       <span v-for="(imageUrl, index) in imageUrls" :key="index">
-        <label :for="index + 1" class="w-full h-full content-center block">
-          Ảnh {{ index + 1 }}
+        <label
+          :for="index + 1"
+          class="w-full h-full content-center flex items-center gap-4 text-base"
+        >
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            :alt="'Ảnh ' + (index + 1)"
+            class="h-full object-cover w-10 rounded"
+          />
+          {{ placeholders[index] }}
         </label>
         <button
-          type="file"
+          type="button"
           :id="index + 1"
           class="hidden"
           @click="() => handleChooseImage(index)"
         />
       </span>
     </div>
-    <img
-      v-for="(imageUrl, index) in imageUrls"
-      v-if="flag"
-      :src="imageUrl"
-      :alt="'Ảnh ' + (index + 1)"
-      class="h-full object-cover w-9"
-    />
     <Button type="submit">Đăng ký</Button>
   </form>
 </template>
 
 <style scoped>
 .image span {
-  @apply bg-[#F0F5F5] h-[50px] border-none text-[#97A69D] p-2 pl-3 rounded-md w-full overflow-hidden text-sm h-[54px];
+  @apply bg-[#F0F5F5] border-none text-[#97A69D] p-2 pl-3 rounded-md w-full overflow-hidden text-sm h-[56px];
 }
 </style>
