@@ -7,7 +7,6 @@ import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 
 const store = window.$stores.profile;
 const storeUser = window.$stores.user;
-console.log("storeUser :", storeUser);
 
 const name = ref(null);
 const email = ref(null);
