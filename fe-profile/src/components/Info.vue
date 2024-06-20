@@ -13,7 +13,7 @@ const standForName = words.map((word) => word.charAt(0).toUpperCase()).join("");
       <img
         :src="avatar"
         :alt="standForName"
-        class="w-full h-full object-cover"
+        class="w-full h-full object-cover rounded-full"
       />
     </span>
     <span

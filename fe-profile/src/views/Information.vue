@@ -7,8 +7,6 @@ const store = window.$stores.user;
 const userInfor = store.userInfor;
 const storeRegis = window.$stores.profile;
 
-console.log("regisData: ", storeRegis.formRegisData);
-
 const name = ref("");
 const avatar = ref("");
 

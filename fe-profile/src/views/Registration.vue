@@ -3,31 +3,36 @@ import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 // import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
+const storeUser = window.$stores.user;
+console.log("storeUser :", storeUser);
 
-const firstName = ref(null);
-const lastName = ref(null);
+const name = ref(null);
 const email = ref(null);
 const phoneNumber = ref(null);
 const city = ref(null);
 const term = ref(false);
+const IDcard = ref(null);
 
 const handleSubmit = async () => {
+  let id = await storeUser?.userInfor?.idUser;
   const formData = {
-    firstName: firstName.value,
-    lastName: lastName.value,
+    Username: name.value ? capitalizeFirstLetter(name.value) : null,
     email: email.value,
     phoneNumber: phoneNumber.value,
-    city: city.value,
+    IDcard: IDcard.value,
+    address: city.value,
     term: term.value,
   };
   if (
-    formData.firstName === null ||
-    formData.lastName === null ||
-    formData.email === null ||
-    formData.phoneNumber === null
+    !formData.Username ||
+    !formData.email ||
+    !formData.IDcard ||
+    !formData.phoneNumber ||
+    !formData.address
   ) {
     alert("Điền đầy đủ");
     return;
@@ -36,7 +41,8 @@ const handleSubmit = async () => {
     alert("Tích");
     return;
   }
-  await store.setFormRegis(formData);
+
+  await store.setFormRegis({ ...formData, idUser: id });
   window.$router.push("/authen-card");
 };
 
@@ -64,22 +70,13 @@ const handleUpdateTerm = (data) => {
       class="pt-[25px] flex flex-col gap-[25px]"
       @submit.prevent="handleSubmit"
     >
-      <span class="flex gap-6">
-        <InputText
-          type="text"
-          v-model="firstName"
-          unstyled="true"
-          placeholder="Họ"
-          class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-        />
-        <InputText
-          type="text"
-          v-model="lastName"
-          unstyled="true"
-          placeholder="Tên"
-          class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-        />
-      </span>
+      <InputText
+        type="text"
+        v-model="name"
+        unstyled="true"
+        placeholder="Họ và tên"
+        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
+      />
       <InputText
         type="text"
         v-model="email"
@@ -92,6 +89,13 @@ const handleUpdateTerm = (data) => {
         v-model="phoneNumber"
         unstyled="true"
         placeholder="Số điện thoại"
+        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
+      />
+      <InputText
+        type="text"
+        v-model="IDcard"
+        unstyled="true"
+        placeholder="Số CCCD"
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
       <Dropdown
