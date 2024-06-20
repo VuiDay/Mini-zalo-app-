@@ -24,11 +24,10 @@ const flag = ref(false);
 const handleChooseImage = async (index) => {
   try {
     const { filePaths, tempFiles } = await chooseImage({
-      sourceType: ["camera"],
-      cameraType: "front",
+      sourceType: ["album", "camera"],
+      cameraType: "back",
     });
     console.log("index :", index);
-    console.log("tempFiles :", tempFiles);
     console.log("filePaths :", filePaths);
 
     imageUrls.value[index] = filePaths[0];
