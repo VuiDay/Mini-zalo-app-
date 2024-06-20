@@ -9,5 +9,16 @@ export const useProfileStore = defineStore("profile", {
     async setFormRegis(data) {
       this.formRegisData = data;
     },
+    async postRegisData(data) {
+      try {
+        const res = await axios.post(
+          "https://be-mini-app.minhquancao0.workers.dev/api/driver/create-driver",
+          data
+        );
+        console.log("res :", res);
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    },
   },
 });

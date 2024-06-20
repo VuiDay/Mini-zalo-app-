@@ -1,21 +1,36 @@
 <script setup>
 import Button from "../components/Button.vue";
 import { onMounted, ref } from "vue";
+import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 import axios from "axios";
 const store = window.$stores.profile;
 
 const imageUrls = ref([null, null, null, null, null]);
 
-const onFileChange = (event, index) => {
-  const file = event.target.files[0];
-  if (file && file.type.startsWith("image/")) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = (e) => {
-      imageUrls.value[index] = e.target.result;
-    };
-  } else {
-    alert("Vui lòng chọn một file ảnh hợp lệ.");
+// const onFileChange = (event, index) => {
+//   const file = event.target.files[0];
+//   if (file && file.type.startsWith("image/")) {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = (e) => {
+//       imageUrls.value[index] = e.target.result;
+//     };
+//   } else {
+//     alert("Vui lòng chọn một file ảnh hợp lệ.");
+//   }
+// };
+
+const handleChooseImage = async (index) => {
+  try {
+    const { filePaths, tempFiles } = await chooseImage({
+      sourceType: ["camera"],
+      cameraType: "front",
+    });
+
+    imageUrls.value[index] = filePaths[0];
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
   }
 };
 
@@ -49,12 +64,9 @@ const handleSubmit = async () => {
     }
 
     const data = store.formRegisData;
+    console.log("data :", data);
 
-    const res = await axios.post(
-      "https://be-mini-app.minhquancao0.workers.dev/api/driver/create-driver",
-      data
-    );
-    console.log("res :", res);
+    // await store.postRegisData(data);
     // window.$router.push("/profile");
   }
 };
@@ -74,15 +86,20 @@ const handleSubmit = async () => {
     <div class="flex flex-col gap-6 image">
       <span v-for="(imageUrl, index) in imageUrls" :key="index">
         <label :for="index + 1" class="w-full h-full content-center block">
+          <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            :alt="'Ảnh ' + (index + 1)"
+            class="h-full object-cover w-9"
+          />
           Ảnh {{ index + 1 }}
         </label>
         <input
           type="file"
           :id="index + 1"
           class="hidden"
-          @change="(event) => onFileChange(event, index)"
+          @change="() => handleChooseImage(index)"
         />
-        <img v-if="imageUrl" :src="imageUrl" :alt="'Ảnh ' + (index + 1)" />
       </span>
     </div>
     <Button type="submit">Đăng ký</Button>
