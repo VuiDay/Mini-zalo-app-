@@ -4,7 +4,7 @@ import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
-import { requestCameraPermission } from "zmp-sdk/apis";
+import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
 const storeUser = window.$stores.user;
@@ -58,8 +58,18 @@ onMounted(() => {
     try {
       const { userAllow, message } = await requestCameraPermission({});
       if (userAllow) {
-        console.log("userAllow :", userAllow);
-        console.log("message :", message);
+        chooseImage({
+          sourceType: ["album", "camera"],
+          cameraType: "back",
+          success: ({ filePaths, tempFiles }) => {
+            console.log("tempFiles :", tempFiles);
+            console.log("filePaths :", filePaths);
+          },
+          fail: (error) => {
+            // xử lý khi gọi api thất bại
+            console.log(error);
+          },
+        });
       }
     } catch (error) {
       console.log(error);
