@@ -27,6 +27,9 @@ const handleChooseImage = async (index) => {
       sourceType: ["camera"],
       cameraType: "front",
     });
+    console.log("index :", index);
+    console.log("tempFiles :", tempFiles);
+    console.log("filePaths :", filePaths);
 
     imageUrls.value[index] = filePaths[0];
   } catch (error) {
@@ -68,6 +71,7 @@ const handleSubmit = async () => {
     console.log("data :", data);
 
     flag.value = true;
+    console.log("flag :", flag.value);
 
     // await store.postRegisData(data);
     // window.$router.push("/profile");
