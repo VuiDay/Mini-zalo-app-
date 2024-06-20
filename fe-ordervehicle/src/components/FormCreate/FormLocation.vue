@@ -75,8 +75,9 @@ onMounted(() => {
     scopes: ["scope.userLocation"],
     success: (data) => {
       // xử lý khi gọi api thành công
-      console.log(data.scope.userLocation);
-      console.log(store.accessToken);
+      if (!data.code) {
+        console.log(store.accessToken);
+      }
     },
     fail: (error) => {
       // xử lý khi gọi api thất bại
