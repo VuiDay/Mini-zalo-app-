@@ -4,7 +4,6 @@ import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
-import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
 const storeUser = window.$stores.user;
@@ -16,7 +15,6 @@ const phoneNumber = ref(null);
 const city = ref(null);
 const term = ref(false);
 const IDcard = ref(null);
-const imgUrl = ref(null);
 
 const handleSubmit = async () => {
   let id = await storeUser?.userInfor?.idUser;
@@ -53,32 +51,6 @@ const handleSelectedUpdate = (data) => {
 const handleUpdateTerm = (data) => {
   term.value = data;
 };
-
-onMounted(() => {
-  const requestCamera = async () => {
-    try {
-      const { userAllow, message } = await requestCameraPermission({});
-      if (userAllow) {
-        chooseImage({
-          sourceType: ["album", "camera"],
-          cameraType: "back",
-          success: ({ filePaths, tempFiles }) => {
-            imgUrl.value = filePaths[0];
-            console.log("tempFiles :", tempFiles);
-            console.log("filePaths :", filePaths);
-          },
-          fail: (error) => {
-            // xử lý khi gọi api thất bại
-            console.log(error);
-          },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  requestCamera();
-});
 </script>
 
 <template>
@@ -90,7 +62,6 @@ onMounted(() => {
       <img class="" src="/arrowleftline.svg" alt="" />
     </div>
     <h2 class="font-bold text-[25px] text-[#111]">Bắt đầu đăng ký</h2>
-    <img :src="imgUrl && imgUrl" alt="anh" />
     <p class="font-normal text-[13px] text-[#111]">
       Vui lòng điền thông tin vào form dưới đây
     </p>
