@@ -1,5 +1,28 @@
+<script setup>
+import Button from "../components/Button.vue";
+import Header from "../components/Header.vue";
+import { openShareSheet } from "zmp-sdk/apis";
+
+const handleSubmit = () => {
+  openShareSheet({
+    type: "zmp_deep_link",
+    data: {
+      title: "My Zalo Mini App - HomePage",
+      description: "Home page",
+      thumbnail: "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg",
+    },
+    success: (res) => {
+      console.log("res :", res);
+    },
+    fail: (err) => {
+      console.log("err :", err);
+    },
+  });
+};
+</script>
+
 <template>
-  <section class="flex flex-col gap-4">
+  <form class="flex flex-col gap-4" @submit.prevent="handleSubmit">
     <div class="views-wrap text-[#000]">
       <Header title="Thoát"></Header>
     </div>
@@ -9,15 +32,10 @@
     </p>
     <img src="/banner.png" alt="" />
     <div class="px-6">
-      <Button>Mời</Button>
+      <Button type="submit">Mời</Button>
     </div>
-  </section>
+  </form>
 </template>
-
-<script setup>
-import Button from "../components/Button.vue";
-import Header from "../components/Header.vue";
-</script>
 
 <style scoped>
 .views-wrap {
