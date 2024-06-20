@@ -39,6 +39,7 @@ import {
   closeApp,
   getAccessToken,
   getPhoneNumber,
+  getLocation,
 } from "zmp-sdk/apis";
 
 const store = window.$stores.user;
@@ -56,18 +57,16 @@ const getAccess = async () => {
 };
 
 const getPhone = async () => {
-  getPhoneNumber({
-    success: async (data) => {
-      let { token } = data;
-      await store.saveToken(token);
-      if (store.userInfor) {
-        route.push("/order-vehicle");
-      }
-    },
-    fail: (error) => {
-      console.log(error);
-    },
-  });
+  try {
+    const tokenPhone = await getPhoneNumber({});
+    await store.saveToken(tokenPhone);
+    if (store.userInfor) {
+      route.push("/order-vehicle");
+    }
+  } catch (error) {
+    // xử lý khi gọi api thất bại
+    console.log(error);
+  }
 };
 
 const getUser = async () => {
