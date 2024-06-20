@@ -1,34 +1,56 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 // import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
+const storeUser = window.$stores.user;
+console.log("storeUser :", storeUser);
 
-const firstName = ref(null);
-const lastName = ref(null);
+const name = ref(null);
 const email = ref(null);
 const phoneNumber = ref(null);
 const city = ref(null);
+const term = ref(false);
+const IDcard = ref(null);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
+const handleSubmit = async () => {
+  let id = await storeUser?.userInfor?.idUser;
   const formData = {
-    firstName: firstName.value,
-    lastName: lastName.value,
+    Username: name.value ? capitalizeFirstLetter(name.value) : null,
     email: email.value,
     phoneNumber: phoneNumber.value,
-    city: city.value,
+    IDcard: IDcard.value,
+    address: city.value,
+    term: term.value,
   };
-  // await store.setFormRegis(formData);
-  console.log("Form Data:", formData);
+  if (
+    !formData.Username ||
+    !formData.email ||
+    !formData.IDcard ||
+    !formData.phoneNumber ||
+    !formData.address
+  ) {
+    alert("Điền đầy đủ");
+    return;
+  }
+  if (formData.term === false) {
+    alert("Tích");
+    return;
+  }
+
+  await store.setFormRegis({ ...formData, idUser: id });
+  window.$router.push("/authen-card");
 };
 
 const handleSelectedUpdate = (data) => {
   city.value = data;
+};
+const handleUpdateTerm = (data) => {
+  term.value = data;
 };
 </script>
 
@@ -44,23 +66,17 @@ const handleSelectedUpdate = (data) => {
     <p class="font-normal text-[13px] text-[#111]">
       Vui lòng điền thông tin vào form dưới đây
     </p>
-    <form class="pt-[25px] flex flex-col gap-[25px]" @submit="handleSubmit">
-      <span class="flex gap-6">
-        <InputText
-          type="text"
-          v-model="firstName"
-          unstyled="true"
-          placeholder="Họ"
-          class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-        />
-        <InputText
-          type="text"
-          v-model="lastName"
-          unstyled="true"
-          placeholder="Tên"
-          class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
-        />
-      </span>
+    <form
+      class="pt-[25px] flex flex-col gap-[25px]"
+      @submit.prevent="handleSubmit"
+    >
+      <InputText
+        type="text"
+        v-model="name"
+        unstyled="true"
+        placeholder="Họ và tên"
+        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
+      />
       <InputText
         type="text"
         v-model="email"
@@ -75,15 +91,22 @@ const handleSelectedUpdate = (data) => {
         placeholder="Số điện thoại"
         class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
       />
+      <InputText
+        type="text"
+        v-model="IDcard"
+        unstyled="true"
+        placeholder="Số CCCD"
+        class="!bg-[#F0F5F5] placeholder:text-[#97A69D] h-[50px] border-none text-[#111] focus:ring-0 w-full"
+      />
       <Dropdown
         placeholder="Chọn tỉnh thành"
         @update:selected="handleSelectedUpdate"
       />
 
       <div class="flex items-center">
-        <CheckBox></CheckBox>
+        <CheckBox @update:term="handleUpdateTerm"></CheckBox>
       </div>
-      <Button type="submit" to="/authen-card">Tiếp tục</Button>
+      <Button type="submit">Tiếp tục</Button>
     </form>
   </section>
 </template>

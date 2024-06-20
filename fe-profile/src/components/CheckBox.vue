@@ -1,11 +1,21 @@
 <script setup>
 import { ref } from "vue";
 const checked = ref(false);
+const emit = defineEmits(["update:term"]);
+const toggleCheckbox = () => {
+  checked.value = !checked.value;
+  emit("update:term", checked.value);
+};
 </script>
 
 <template>
   <div class="checkbox-container">
-    <input type="checkbox" id="custom-checkbox" v-model="checked" />
+    <input
+      type="checkbox"
+      id="custom-checkbox"
+      v-model="checked"
+      @click="toggleCheckbox"
+    />
     <label for="custom-checkbox" class="custom-checkbox-label">
       Bằng cách chọn hộp này, bạn đồng ý với
       <a href="#" class="custom-checkbox-label-link">điều khoản & điều kiện</a>

@@ -5,6 +5,7 @@ import SideBar from "../components/SideBar.vue";
 
 const store = window.$stores.user;
 const userInfor = store.userInfor;
+const storeRegis = window.$stores.profile;
 
 const name = ref("");
 const avatar = ref("");
