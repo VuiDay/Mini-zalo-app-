@@ -95,11 +95,11 @@ const handleSubmit = async () => {
         <label :for="index + 1" class="w-full h-full content-center block">
           Ảnh {{ index + 1 }}
         </label>
-        <input
+        <button
           type="file"
           :id="index + 1"
           class="hidden"
-          @change="() => handleChooseImage(index)"
+          @click="() => handleChooseImage(index)"
         />
       </span>
     </div>
