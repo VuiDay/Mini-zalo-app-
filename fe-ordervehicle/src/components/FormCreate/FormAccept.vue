@@ -174,14 +174,8 @@
     </div>
     <div style="margin-top: 20px">
       <button
-        style="
-          width: 327px;
-          height: 56px;
-          border-radius: 50px;
-          background: #2ecb70;
-          box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25);
-          color: white;
-        "
+        class="w-[316.65px] h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
+        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
         @click=""
       >
         Xác nhận

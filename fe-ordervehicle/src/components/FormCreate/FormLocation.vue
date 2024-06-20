@@ -43,7 +43,7 @@
       ></button> -->
       <RouterLink
         :to="{ name: 'acceptbooking' }"
-        class="w-[327px] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[105.5px]"
+        class="w-[327px] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
         Xác nhận đặt xe
