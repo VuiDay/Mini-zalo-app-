@@ -4,7 +4,7 @@ import Button from "../components/Button.vue";
 import CheckBox from "../components/CheckBox.vue";
 import Dropdown from "../components/DropDown.vue";
 import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
-// import { requestCameraPermission, chooseImage } from "zmp-sdk/apis";
+import { requestCameraPermission } from "zmp-sdk/apis";
 
 const store = window.$stores.profile;
 const storeUser = window.$stores.user;
@@ -52,6 +52,21 @@ const handleSelectedUpdate = (data) => {
 const handleUpdateTerm = (data) => {
   term.value = data;
 };
+
+onMounted(() => {
+  const requestCamera = async () => {
+    try {
+      const { userAllow, message } = await requestCameraPermission({});
+      if (userAllow) {
+        console.log("userAllow :", userAllow);
+        console.log("message :", message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  requestCamera();
+});
 </script>
 
 <template>
