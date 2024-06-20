@@ -20,9 +20,9 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import Header from "@/components/Header.vue";
 import ApplicationHistory from "@/components/Application/ApplicationHistory.vue";
-console.log(window.$stores);
 </script>
 
 <style scoped>

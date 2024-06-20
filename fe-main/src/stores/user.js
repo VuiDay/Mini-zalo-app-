@@ -28,7 +28,6 @@ export const useUserStore = defineStore("user", {
         name: "Cường Nè",
         phone: "84768921323",
       };
-      console.log("token", token.token, "access", this.accessToken);
       const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
         headers: {
           access_token: this.accessToken,
@@ -36,19 +35,15 @@ export const useUserStore = defineStore("user", {
           secret_key: "rUUl3y4Ua271UMi7UYMI",
         },
       });
-      console.log(res.data);
       const dataUser = {
         ...this.dataUser,
         phone: res.data.data?.number,
       };
-      console.log(dataUser);
       const user = await axios.post(
         "https://be-mini-app.minhquancao0.workers.dev/api/user/user-current",
         dataUser.phone ? dataUser : fakeData
       );
-      console.log(user.data);
       this.userInfor = user.data;
-      console.log(this.userInfor);
     },
   },
 });

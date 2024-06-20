@@ -9,6 +9,7 @@
       <input
         type="text"
         id="startLocate"
+        v-model="startLocate"
         value="hehehe"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px]"
       />
@@ -53,7 +54,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { authorize } from "zmp-sdk/apis";
+
+const startLocate = ref("");
 const vehicles = [
   {
     name: "car",
@@ -65,7 +69,20 @@ const vehicles = [
   },
 ];
 const store = window.$stores.profile;
-console.log(store.test);
+
+onMounted(() => {
+  authorize({
+    scopes: ["scope.userLocation"],
+    success: (data) => {
+      // xử lý khi gọi api thành công
+      console.log(data);
+    },
+    fail: (error) => {
+      // xử lý khi gọi api thất bại
+      console.log(error);
+    },
+  });
+});
 </script>
 
 <style scoped>
