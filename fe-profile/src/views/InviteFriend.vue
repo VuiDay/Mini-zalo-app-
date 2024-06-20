@@ -9,7 +9,7 @@ const handleSubmit = () => {
     data: {
       title: "Go App - by ...",
       thumbnail: "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg",
-      path: "https://fc1fb012.mini-zalo-app.pages.dev/",
+      path: "https://zalo.me/s/3057952013644751014/?utm_source=zalo-qr",
     },
     success: (res) => {
       console.log("res :", res);
