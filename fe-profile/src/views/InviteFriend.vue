@@ -5,11 +5,11 @@ import { openShareSheet } from "zmp-sdk/apis";
 
 const handleSubmit = () => {
   openShareSheet({
-    type: "zmp_deep_link",
+    type: "zmp",
     data: {
-      title: "My Zalo Mini App - HomePage",
-      description: "Home page",
+      title: "Go App - by ...",
       thumbnail: "https://sample-videos.com/img/Sample-jpg-image-50kb.jpg",
+      path: "https://fc1fb012.mini-zalo-app.pages.dev/",
     },
     success: (res) => {
       console.log("res :", res);
