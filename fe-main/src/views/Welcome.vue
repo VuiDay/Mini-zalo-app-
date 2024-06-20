@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import {
   getUserInfo,
@@ -46,62 +47,64 @@ const store = window.$stores.user;
 
 const route = useRouter();
 
-const getAccess = async () => {
-  try {
-    const accessToken = await getAccessToken({});
-    await store.saveAccessTTk(accessToken);
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-};
-
-const getPhone = async () => {
-  try {
-    const tokenPhone = await getPhoneNumber({});
-    await store.saveToken(tokenPhone);
-    if (store.userInfor) {
-      route.push("/order-vehicle");
+onMounted(() => {
+  const getAccess = async () => {
+    try {
+      const accessToken = await getAccessToken({});
+      await store.saveAccessTTk(accessToken);
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log(error);
     }
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-};
+  };
 
-const getUser = async () => {
-  try {
-    const { userInfo } = await getUserInfo({});
-    await store.saveInforUser(userInfo);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const closeMiniApp = async () => {
-  try {
-    await closeApp({});
-  } catch (error) {
-    // xử lý khi gọi api thất bại
-    console.log(error);
-  }
-};
-
-authorize({
-  scopes: ["scope.userInfo", "scope.userPhonenumber"],
-  success: async (data) => {
-    if (data.code) {
-      closeMiniApp();
-    } else if (!data.code) {
-      await getAccess();
-      await getUser();
-      await getPhone();
+  const getPhone = async () => {
+    try {
+      const tokenPhone = await getPhoneNumber({});
+      await store.saveToken(tokenPhone);
+      if (store.userInfor) {
+        route.push("/order-vehicle");
+      }
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log(error);
     }
-  },
-  fail: (error) => {
-    // xử lý khi gọi api thất bại
-    console.log(error, "234");
-  },
+  };
+
+  const getUser = async () => {
+    try {
+      const { userInfo } = await getUserInfo({});
+      await store.saveInforUser(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const closeMiniApp = async () => {
+    try {
+      await closeApp({});
+    } catch (error) {
+      // xử lý khi gọi api thất bại
+      console.log(error);
+    }
+  };
+
+  authorize({
+    scopes: ["scope.userInfo", "scope.userPhonenumber"],
+    success: async (data) => {
+      if (data.code) {
+        closeMiniApp();
+      } else if (!data.code) {
+        await getAccess();
+        await getUser();
+        await getPhone();
+      }
+    },
+    fail: (error) => {
+      // xử lý khi gọi api thất bại
+      console.log(error, "234");
+    },
+  });
 });
 </script>
 
