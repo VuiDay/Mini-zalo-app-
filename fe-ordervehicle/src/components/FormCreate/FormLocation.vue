@@ -68,14 +68,15 @@ const vehicles = [
     icon: "/Vhc/bike.svg",
   },
 ];
-const store = window.$stores.profile;
+const store = window.$stores.user;
 
 onMounted(() => {
   authorize({
     scopes: ["scope.userLocation"],
     success: (data) => {
       // xử lý khi gọi api thành công
-      console.log(data);
+      console.log(data.scope.userLocation);
+      console.log(store.accessToken);
     },
     fail: (error) => {
       // xử lý khi gọi api thất bại
