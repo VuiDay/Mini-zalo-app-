@@ -1,16 +1,20 @@
 import { defineStore } from "pinia";
+import axios from "axios";
 
 export const useOrderVehicleStore = defineStore("orderVehicle", {
   state: () => ({
-    vehicles: [],
-    selectedVehicle: null,
+    secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {
-    addVehicle(vehicle) {
-      this.vehicles.push(vehicle);
-    },
-    selectVehicle(vehicle) {
-      this.selectedVehicle = vehicle;
+    async saveLocate(token, accessToken) {
+      const res = await axios.get("https://graph.zalo.me/v2.0/me/info", {
+        headers: {
+          access_token: accessToken,
+          code: token,
+          secret_key: this.secretKey,
+        },
+      });
+      console.log(res.data);
     },
   },
 });

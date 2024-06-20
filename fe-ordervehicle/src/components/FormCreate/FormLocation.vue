@@ -55,7 +55,9 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { authorize } from "zmp-sdk/apis";
+import { authorize, getLocation } from "zmp-sdk/apis";
+const storeUser = window.$stores.user;
+const storeOrder = window.$stores.orderVehicle;
 
 const startLocate = ref("");
 const vehicles = [
@@ -68,15 +70,23 @@ const vehicles = [
     icon: "/Vhc/bike.svg",
   },
 ];
-const store = window.$stores.user;
 
 onMounted(() => {
+  const getLocate = async () => {
+    try {
+      const { token } = await getLocation({});
+      await storeOrder.saveLocate(token, storeUser.accessToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   authorize({
     scopes: ["scope.userLocation"],
-    success: (data) => {
+    success: async (data) => {
       // xử lý khi gọi api thành công
       if (!data.code) {
-        console.log(store.accessToken);
+        await getLocate();
       }
     },
     fail: (error) => {
