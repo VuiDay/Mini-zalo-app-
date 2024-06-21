@@ -41,10 +41,7 @@
           v-for="(vehicle, index) in vehicles"
           :key="index"
           @click="() => ((checkVhc = index), (typeVhc = vehicle.name))"
-          :src="
-            'http://localhost:3001' + `${vehicle.icon}` ||
-            'https://ordervehicle-mini-app.pages.dev' + `${vehicle.icon}`
-          "
+          :src="getVehicleIcon(vehicle.icon)"
           alt=""
           :class="[Number(index) === Number(checkVhc) ? 'activeVhc' : '']"
           class="rounded-[20px]"
@@ -101,6 +98,14 @@ const vehicles = [
     icon: "/Vhc/bike.svg",
   },
 ];
+
+const getVehicleIcon = (iconPath) => {
+  const localHost = "http://localhost:3001";
+  const productionHost = "https://ordervehicle-mini-app.pages.dev";
+  return `${
+    window.location.hostname === "localhost" ? localHost : productionHost
+  }${iconPath}`;
+};
 
 onMounted(() => {
   const getLocate = async () => {
