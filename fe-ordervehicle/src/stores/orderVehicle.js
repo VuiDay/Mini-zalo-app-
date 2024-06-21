@@ -3,6 +3,7 @@ import axios from "axios";
 
 export const useOrderVehicleStore = defineStore("orderVehicle", {
   state: () => ({
+    locate: "",
     secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {
@@ -14,7 +15,8 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
           secret_key: this.secretKey,
         },
       });
-      console.log(res.data.latitude, res.data.longitude);
+      this.locate = res.data;
+      console.log(this.locate.latitude, this.locate);
     },
   },
 });

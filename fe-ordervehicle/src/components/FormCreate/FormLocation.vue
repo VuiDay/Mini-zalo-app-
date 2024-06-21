@@ -10,6 +10,7 @@
         type="text"
         id="startLocate"
         v-model="startLocate"
+        placeholder="Vị trí hiện tại"
         value="hehehe"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
@@ -25,6 +26,7 @@
         value="hehehe"
         id="endLocate"
         v-model="endLocate"
+        placeholder="Diểm đến"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
@@ -38,10 +40,13 @@
         <img
           v-for="(vehicle, index) in vehicles"
           :key="index"
-          @click="() => (checkVhc = index)"
-          :src="vehicle.icon"
+          @click="() => ((checkVhc = index), (typeVhc = vehicle.name))"
+          :src="
+            'http://localhost:3001' + `${vehicle.icon}` ||
+            'https://ordervehicle-mini-app.pages.dev' + `${vehicle.icon}`
+          "
           alt=""
-          :class="Number(index) === Number(checkVhc) ? 'activeVhc' : ''"
+          :class="[Number(index) === Number(checkVhc) ? 'activeVhc' : '']"
           class="rounded-[20px]"
         />
       </div>
@@ -56,6 +61,7 @@
         type="text"
         value="hehehe"
         id="endLocate"
+        placeholder="Mã giới thiệu nhà hàng (nếu có)"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
@@ -66,7 +72,7 @@
       ></button> -->
       <RouterLink
         :to="{ name: 'acceptbooking' }"
-        class="w-[327px] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
+        class="rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
         Xác nhận đặt xe
@@ -84,14 +90,15 @@ const checkVhc = ref(0);
 
 const startLocate = ref("");
 const endLocate = ref("");
+const typeVhc = ref("");
 const vehicles = [
   {
     name: "Ôtô",
-    icon: "http://localhost:3001/Vhc/car.svg",
+    icon: "/Vhc/car.svg",
   },
   {
     name: "Xe máy",
-    icon: "http://localhost:3001/Vhc/bike.svg",
+    icon: "/Vhc/bike.svg",
   },
 ];
 
