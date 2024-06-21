@@ -16,7 +16,11 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
         },
       });
       this.locate = res.data;
-      console.log(this.locate.latitude, this.locate);
+      console.log(
+        this.locate.data.latitude,
+        this.locate.data.longitude,
+        this.locate
+      );
     },
   },
 });
