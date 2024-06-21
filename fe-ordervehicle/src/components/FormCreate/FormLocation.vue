@@ -23,7 +23,6 @@
       >
       <input
         type="text"
-        value="hehehe"
         id="endLocate"
         v-model="endLocate"
         placeholder="Diểm đến"
@@ -56,9 +55,9 @@
       >
       <input
         type="text"
-        value="hehehe"
         id="endLocate"
         placeholder="Mã giới thiệu nhà hàng (nếu có)"
+        v-model="codeRestau"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
@@ -69,7 +68,7 @@
       ></button> -->
       <RouterLink
         :to="{ name: 'acceptbooking' }"
-        class="rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
+        class="w-[100%] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
         Xác nhận đặt xe
@@ -88,6 +87,7 @@ const checkVhc = ref(0);
 const startLocate = ref("");
 const endLocate = ref("");
 const typeVhc = ref("");
+const codeRestau = ref("");
 const vehicles = [
   {
     name: "Ôtô",
