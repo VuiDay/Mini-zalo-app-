@@ -78,7 +78,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import { authorize, getLocation } from "zmp-sdk/apis";
 const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
@@ -130,6 +130,10 @@ onMounted(() => {
       console.log(error);
     },
   });
+});
+
+watchEffect(() => {
+  startLocate.value = storeOrder.locate ? storeOrder.locate : "";
 });
 </script>
 

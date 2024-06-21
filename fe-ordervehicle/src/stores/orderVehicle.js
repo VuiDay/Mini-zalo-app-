@@ -4,6 +4,7 @@ import axios from "axios";
 export const useOrderVehicleStore = defineStore("orderVehicle", {
   state: () => ({
     locate: "",
+    nameLocate: "",
     secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {
@@ -19,6 +20,7 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${res.data.data.latitude}&lon=${res.data.data.longitude}`
       );
       this.locate = locate.data.display_name;
+      this.nameLocate = locate.data.name;
       console.log(locate.data);
       // console.log(
       //   this.locate.data.latitude,
