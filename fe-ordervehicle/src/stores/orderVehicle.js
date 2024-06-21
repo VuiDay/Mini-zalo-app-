@@ -18,7 +18,7 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
       const locate = await axios.get(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${res.data.data.latitude}&lon=${res.data.data.longitude}`
       );
-      console.log(locate.data);
+      console.log(locate.data.display_name);
       // console.log(
       //   this.locate.data.latitude,
       //   this.locate.data.longitude,
