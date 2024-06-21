@@ -15,12 +15,15 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
           secret_key: this.secretKey,
         },
       });
-      this.locate = res.data;
-      console.log(
-        this.locate.data.latitude,
-        this.locate.data.longitude,
-        this.locate
+      const locate = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${res.data.data.latitude}&lon=${res.data.data.longitude}`
       );
+      console.log(locate.data);
+      // console.log(
+      //   this.locate.data.latitude,
+      //   this.locate.data.longitude,
+      //   this.locate
+      // );
     },
   },
 });
