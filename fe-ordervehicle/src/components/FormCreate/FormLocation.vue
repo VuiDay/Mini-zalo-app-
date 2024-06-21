@@ -4,38 +4,60 @@
       <label
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
         for="startLocate"
-        >Vị trí hiện tại</label
+        >*Vị trí hiện tại</label
       >
       <input
         type="text"
         id="startLocate"
         v-model="startLocate"
         value="hehehe"
-        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px]"
+        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         for="endLocat"
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
-        >Điểm đến</label
+        >*Điểm đến</label
       >
       <input
         type="text"
         value="hehehe"
         id="endLocate"
-        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px]"
+        v-model="endLocate"
+        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         for=""
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
-        >Chọn phương tiện của bạn</label
+        >*Chọn phương tiện của bạn</label
       >
       <div class="flex justify-between mt-2">
-        <img v-for="(vehicle, index) of vehicles" :src="vehicle.icon" alt="" />
+        <img
+          v-for="(vehicle, index) in vehicles"
+          :key="index"
+          @click="() => (checkVhc = index)"
+          :src="vehicle.icon"
+          alt=""
+          :class="Number(index) === Number(checkVhc) ? 'activeVhc' : ''"
+          class="rounded-[20px]"
+        />
       </div>
+    </div>
+    <div class="flex flex-col" style="margin-bottom: 10px">
+      <label
+        for="endLocat"
+        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        >Mã giới thiệu nhà hàng</label
+      >
+      <input
+        type="text"
+        value="hehehe"
+        id="endLocate"
+        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
+      />
     </div>
     <div style="margin-top: 30px">
       <!-- <button
@@ -58,16 +80,18 @@ import { ref, onMounted } from "vue";
 import { authorize, getLocation } from "zmp-sdk/apis";
 const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
+const checkVhc = ref(0);
 
 const startLocate = ref("");
+const endLocate = ref("");
 const vehicles = [
   {
-    name: "car",
-    icon: "/Vhc/car.svg",
+    name: "Ôtô",
+    icon: "http://localhost:3001/Vhc/car.svg",
   },
   {
-    name: "bike",
-    icon: "/Vhc/bike.svg",
+    name: "Xe máy",
+    icon: "http://localhost:3001/Vhc/bike.svg",
   },
 ];
 
@@ -100,5 +124,9 @@ onMounted(() => {
 <style scoped>
 .activeVhc {
   box-shadow: rgba(46, 203, 112, 0.5) 0px 5px 15px;
+  border: 1px solid rgba(46, 203, 112);
+}
+.input-text:focus {
+  border: 1px solid rgba(46, 203, 112) !important;
 }
 </style>

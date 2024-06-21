@@ -14,7 +14,7 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
           secret_key: this.secretKey,
         },
       });
-      console.log(res.data);
+      console.log(res.data.latitude, res.data.longitude);
     },
   },
 });
