@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="margin-top: 15px">
+  <div v-if="loadingSuccess" class="" style="margin-top: 15px">
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
@@ -75,6 +75,15 @@
       </RouterLink>
     </div>
   </div>
+  <div v-else class="h-[100vh] w-[100%] flex justify-center items-center">
+    <ProgressSpinner
+      style="width: 50px; height: 50px"
+      strokeWidth="8"
+      fill="transparent"
+      animationDuration=".5s"
+      aria-label="Custom ProgressSpinner"
+    />
+  </div>
 </template>
 
 <script setup>
@@ -88,6 +97,7 @@ const startLocate = ref("");
 const endLocate = ref("");
 const typeVhc = ref("");
 const codeRestau = ref("");
+const loadingSuccess = ref(false);
 const vehicles = [
   {
     name: "Ôtô",
@@ -134,6 +144,9 @@ onMounted(() => {
 
 watchEffect(() => {
   startLocate.value = storeOrder.locate ? storeOrder.locate : "";
+  setTimeout(() => {
+    loadingSuccess.value = true;
+  }, 1300);
 });
 </script>
 
