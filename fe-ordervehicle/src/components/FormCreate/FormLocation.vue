@@ -10,8 +10,8 @@
         type="text"
         id="startLocate"
         v-model="startLocate"
+        onchange="(e) => console.log(startLocate)"
         placeholder="Vị trí hiện tại"
-        value="hehehe"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
@@ -28,6 +28,30 @@
         placeholder="Diểm đến"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
+      <div
+        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
+      >
+        <div class="w-[100%] mb-[15px]">
+          <p class="text-[16px] font-semibold flex">
+            <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
+            47 Đường Lệ Ninh
+          </p>
+          <p class="text-[12px] truncate">
+            Thành Phố Vinh, Nghệ An, Thành Phố Vinh, Nghệ An, Thành Phố Vinh,
+            Nghệ An
+          </p>
+        </div>
+        <div class="w-[100%]">
+          <p class="text-[16px] font-semibold flex">
+            <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
+            47 Đường Lệ Ninh
+          </p>
+          <p class="text-[12px] truncate">
+            Thành Phố Vinh, Nghệ An, Thành Phố Vinh, Nghệ An, Thành Phố Vinh,
+            Nghệ An
+          </p>
+        </div>
+      </div>
     </div>
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
@@ -68,7 +92,7 @@
       ></button> -->
       <RouterLink
         :to="{ name: 'acceptbooking' }"
-        class="w-[100%] rounded-[50px] bg-[#2ecb70] text-white py-[19px] px-[100.5px]"
+        class="w-full rounded-[50px] bg-[#2ecb70] text-white h-[56px] flex justify-center items-center"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
         Xác nhận đặt xe
@@ -87,7 +111,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted, watchEffect, watch } from "vue";
 import { authorize, getLocation } from "zmp-sdk/apis";
 const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
@@ -134,9 +158,7 @@ onMounted(() => {
       if (!data.code) {
         loadingSuccess.value = false;
         await getLocate();
-        setTimeout(() => {
-          loadingSuccess.value = true;
-        }, 1000);
+        loadingSuccess.value = true;
       }
     },
     fail: (error) => {
@@ -148,8 +170,9 @@ onMounted(() => {
 
 watchEffect(() => {
   startLocate.value = storeOrder.locate ? storeOrder.locate : "";
-  console.log(startLocate.value.split("")[0]);
 });
+
+watch(startLocate.value, () => {});
 </script>
 
 <style scoped>

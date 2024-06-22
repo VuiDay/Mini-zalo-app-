@@ -174,7 +174,7 @@
     </div>
     <div style="margin-top: 20px">
       <button
-        class="max-w-[100%] w-[316.65px] h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
+        class="max-w-[100%] w-full h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
         @click=""
       >
