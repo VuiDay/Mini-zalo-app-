@@ -3,8 +3,8 @@ import axios from "axios";
 
 export const useOrderVehicleStore = defineStore("orderVehicle", {
   state: () => ({
-    locate: "",
-    nameLocate: "",
+    locate: null,
+    nameLocate: null,
     secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {

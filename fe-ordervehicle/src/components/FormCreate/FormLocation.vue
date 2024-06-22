@@ -134,6 +134,9 @@ onMounted(() => {
       if (!data.code) {
         await getLocate();
       }
+      setTimeout(() => {
+        loadingSuccess.value = true;
+      }, 1500);
     },
     fail: (error) => {
       // xử lý khi gọi api thất bại
@@ -144,9 +147,6 @@ onMounted(() => {
 
 watchEffect(() => {
   startLocate.value = storeOrder.locate ? storeOrder.locate : "";
-  setTimeout(() => {
-    loadingSuccess.value = true;
-  }, 1300);
 });
 </script>
 
