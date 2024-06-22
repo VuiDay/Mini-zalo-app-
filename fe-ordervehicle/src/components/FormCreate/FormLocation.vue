@@ -97,7 +97,7 @@ const startLocate = ref("");
 const endLocate = ref("");
 const typeVhc = ref("");
 const codeRestau = ref("");
-const loadingSuccess = ref(false);
+const loadingSuccess = ref(true);
 const vehicles = [
   {
     name: "Ôtô",
@@ -132,11 +132,12 @@ onMounted(() => {
     success: async (data) => {
       // xử lý khi gọi api thành công
       if (!data.code) {
+        loadingSuccess.value = false;
         await getLocate();
+        setTimeout(() => {
+          loadingSuccess.value = true;
+        }, 1000);
       }
-      setTimeout(() => {
-        loadingSuccess.value = true;
-      }, 1500);
     },
     fail: (error) => {
       // xử lý khi gọi api thất bại
@@ -147,6 +148,7 @@ onMounted(() => {
 
 watchEffect(() => {
   startLocate.value = storeOrder.locate ? storeOrder.locate : "";
+  console.log(startLocate.value.split("")[0]);
 });
 </script>
 
