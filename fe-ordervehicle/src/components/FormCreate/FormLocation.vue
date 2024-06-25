@@ -4,55 +4,90 @@
       <label
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
         for="startLocate"
-        >*Vị trí hiện tại</label
       >
+        <span class="font-semibold">{{ locateAuto.name }}</span>
+        <p>{{ locateAuto.display_name }}</p>
+      </label>
       <input
         type="text"
         id="startLocate"
         v-model="startLocate"
-        onchange="(e) => console.log(startLocate)"
-        placeholder="Vị trí hiện tại"
+        placeholder="Nhập địa chỉ chi tiết"
         class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
       />
     </div>
-    <div class="flex flex-col" style="margin-bottom: 10px">
+
+    <div
+      class="flex flex-col mb-[10px]"
+      :class="
+        checkEndL
+          ? 'fixed top-0 right-0 left-0 bg-white h-[100vh] p-[10px]'
+          : ''
+      "
+    >
       <label
         for="endLocat"
         class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
         >*Điểm đến</label
       >
-      <input
-        type="text"
-        id="endLocate"
-        v-model="endLocate"
-        placeholder="Diểm đến"
-        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
-      />
+      <div class="relative">
+        <input
+          type="text"
+          id="endLocate"
+          v-model="endLocate"
+          @click="() => (checkEndL = true)"
+          @keyup.enter="checkEndL = false"
+          placeholder="Diểm đến"
+          class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text w-[100%]"
+        />
+        <img
+          v-if="checkEndL"
+          @mousedown.stop="
+            () => {
+              checkEndL = false;
+              endLocate = '';
+            }
+          "
+          class="w-[20px] absolute right-[16px] top-1/2 transform -translate-y-[30%] p-[2px] bg-[#ccc] rounded-[50px]"
+          src="/cancel.svg"
+          alt=""
+        />
+      </div>
       <div
-        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
+        class="bg-[#f0f5f5] h-[100vh] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text overflow-auto"
+        v-if="endLocate && checkEndL"
       >
-        <div class="w-[100%] mb-[15px]">
-          <p class="text-[16px] font-semibold flex">
-            <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
-            47 Đường Lệ Ninh
-          </p>
-          <p class="text-[12px] truncate">
-            Thành Phố Vinh, Nghệ An, Thành Phố Vinh, Nghệ An, Thành Phố Vinh,
-            Nghệ An
-          </p>
+        <div
+          v-if="!skeletonEndL"
+          v-for="index of 5"
+          class="w-[100%] rounded-md p-2"
+        >
+          <div class="animate-pulse flex flex-col space-y-4">
+            <div class="flex items-center">
+              <div class="rounded-full bg-slate-700 h-4 w-4 mr-2"></div>
+              <div class="flex-1 h-4 bg-slate-700 rounded"></div>
+            </div>
+            <div class="h-3 bg-slate-700 rounded w-3/4"></div>
+          </div>
         </div>
-        <div class="w-[100%]">
+
+        <div
+          v-else
+          v-for="(option, index) of optionendLocate"
+          @click="(endLocate = option.display_name), (checkEndL = false)"
+          class="w-[100%] p-2"
+        >
           <p class="text-[16px] font-semibold flex">
             <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
-            47 Đường Lệ Ninh
+            {{ option.name }}
           </p>
           <p class="text-[12px] truncate">
-            Thành Phố Vinh, Nghệ An, Thành Phố Vinh, Nghệ An, Thành Phố Vinh,
-            Nghệ An
+            {{ option.display_name }}
           </p>
         </div>
       </div>
     </div>
+
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         for=""
@@ -113,15 +148,24 @@
 <script setup>
 import { ref, onMounted, watchEffect, watch } from "vue";
 import { authorize, getLocation } from "zmp-sdk/apis";
+import { debounce } from "lodash";
 const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
 const checkVhc = ref(0);
 
 const startLocate = ref("");
+const locateAuto = ref("");
+
 const endLocate = ref("");
+const optionendLocate = ref("");
+
 const typeVhc = ref("");
 const codeRestau = ref("");
+
 const loadingSuccess = ref(true);
+const checkEndL = ref(false);
+const skeletonEndL = ref(true);
+
 const vehicles = [
   {
     name: "Ôtô",
@@ -169,10 +213,18 @@ onMounted(() => {
 });
 
 watchEffect(() => {
-  startLocate.value = storeOrder.locate ? storeOrder.locate : "";
+  locateAuto.value = storeOrder.locate ? storeOrder.locate : "";
+  optionendLocate.value = storeOrder.locatefind ? storeOrder.locatefind : [];
 });
 
-watch(startLocate.value, () => {});
+watch(
+  endLocate,
+  debounce(async (newValue) => {
+    skeletonEndL.value = false;
+    await storeOrder.locateChange(newValue);
+    skeletonEndL.value = true;
+  }, 500)
+);
 </script>
 
 <style scoped>
