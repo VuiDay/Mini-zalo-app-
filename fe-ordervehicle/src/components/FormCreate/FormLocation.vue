@@ -2,32 +2,117 @@
   <div v-if="loadingSuccess" class="" style="margin-top: 15px">
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
-        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px] flex justify-between"
         for="startLocate"
       >
-        <span class="font-semibold">{{ locateAuto.name }}</span>
-        <p>{{ locateAuto.display_name }}</p>
+        <div class="w-[60%]">
+          <span class="font-semibold">{{ locateAuto.name }}</span>
+          <p class="truncate">
+            {{ locateAuto.display_name }}
+          </p>
+        </div>
+        <button
+          class="py-[5px] px-[20px] text-white rounded-[50px] bg-[rgba(46,203,112)]"
+          @click="() => (checkStartL = true)"
+        >
+          Thay đổi
+        </button>
       </label>
-      <input
-        type="text"
-        id="startLocate"
-        v-model="startLocate"
-        placeholder="Nhập địa chỉ chi tiết"
-        class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text"
-      />
+      <b
+        class="block w-[100%] h-[1px] bg-[rgba(46,203,112)] rounded-[50px] my-[10px]"
+      ></b>
+
+      <div class="relative">
+        <input
+          type="text"
+          id="startLocate"
+          v-model="detailStartL"
+          placeholder="Nhập địa chỉ chi tiết"
+          class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text w-[100%]"
+        />
+      </div>
+
+      <div
+        v-if="checkStartL"
+        class="z-50 fixed top-0 left-0 right-0 bg-white py-[36px] px-[24px] max-h-[100vh] h-[100vh] flex flex-col"
+      >
+        <div class="relative">
+          <input
+            class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text w-[100%]"
+            type="text"
+            v-model="locateAuto.display_name"
+            @keyup.enter="checkStartL = false"
+            placeholder="Nhập địa chỉ"
+            name=""
+            id=""
+          />
+          <img
+            v-if="checkStartL"
+            @mousedown.stop="
+              () => {
+                checkStartL = false;
+                locateAuto = storeOrder.locate
+                  ? storeOrder.locate
+                  : { name: 'Địa chỉ', display_name: '' };
+              }
+            "
+            class="w-[20px] absolute right-[16px] top-1/2 transform -translate-y-[30%] p-[2px] bg-[#ccc] rounded-[50px]"
+            src="/cancel.svg"
+            alt=""
+          />
+        </div>
+
+        <div
+          class="bg-[#f0f5f5] h-[100vh] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text overflow-auto"
+          v-if="checkStartL && locateAuto.display_name"
+        >
+          <div
+            v-if="!skeletonStartL"
+            v-for="index of 5"
+            class="w-[100%] rounded-md p-2"
+          >
+            <div class="animate-pulse flex flex-col space-y-4">
+              <div class="flex items-center">
+                <div class="rounded-full bg-slate-700 h-4 w-4 mr-2"></div>
+                <div class="flex-1 h-4 bg-slate-700 rounded"></div>
+              </div>
+              <div class="h-3 bg-slate-700 rounded w-3/4"></div>
+            </div>
+          </div>
+
+          <div
+            v-else
+            v-for="(option, index) of optionStartL"
+            @click="
+              (locateAuto.display_name = option.display_name),
+                (locateAuto.name = option.name ? option.name : 'Điểm đón'),
+                (checkStartL = false)
+            "
+            class="w-[100%] p-2"
+          >
+            <p class="text-[16px] font-semibold flex">
+              <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
+              {{ option.name }}
+            </p>
+            <p class="text-[12px] truncate">
+              {{ option.display_name }}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div
       class="flex flex-col mb-[10px]"
       :class="
         checkEndL
-          ? 'fixed top-0 right-0 left-0 bg-white h-[100vh] p-[10px]'
+          ? 'fixed top-0 right-0 left-0 bg-white h-[100vh] py-[36px] px-[24px]'
           : ''
       "
     >
       <label
-        for="endLocat"
-        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        for="endLocate"
+        class="text-[#77869e] text-[13px] not-italic leading-[normal] tracking-[0.239px] font-semibold my-[10px]"
         >*Điểm đến</label
       >
       <div class="relative">
@@ -73,7 +158,7 @@
 
         <div
           v-else
-          v-for="(option, index) of optionendLocate"
+          v-for="(option, index) of optionEndL"
           @click="(endLocate = option.display_name), (checkEndL = false)"
           class="w-[100%] p-2"
         >
@@ -91,7 +176,7 @@
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         for=""
-        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        class="text-[#77869e] text-[13px] not-italic leading-[normal] tracking-[0.239px] font-semibold my-[10px]"
         >*Chọn phương tiện của bạn</label
       >
       <div class="flex justify-between mt-2">
@@ -109,7 +194,7 @@
     <div class="flex flex-col" style="margin-bottom: 10px">
       <label
         for="endLocat"
-        class="text-[#77869e] text-[13px] not-italic font-normal leading-[normal] tracking-[0.239px]"
+        class="text-[#77869e] text-[13px] not-italic leading-[normal] tracking-[0.239px] font-semibold my-[10px]"
         >Mã giới thiệu nhà hàng</label
       >
       <input
@@ -153,11 +238,13 @@ const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
 const checkVhc = ref(0);
 
-const startLocate = ref("");
-const locateAuto = ref("");
+const detailStartL = ref("");
+const checkStartL = ref(false);
+const locateAuto = ref({ name: "Địa chỉ", display_name: "" });
+const optionStartL = ref("");
 
 const endLocate = ref("");
-const optionendLocate = ref("");
+const optionEndL = ref("");
 
 const typeVhc = ref("");
 const codeRestau = ref("");
@@ -165,6 +252,7 @@ const codeRestau = ref("");
 const loadingSuccess = ref(true);
 const checkEndL = ref(false);
 const skeletonEndL = ref(true);
+const skeletonStartL = ref(true);
 
 const vehicles = [
   {
@@ -203,6 +291,9 @@ onMounted(() => {
         loadingSuccess.value = false;
         await getLocate();
         loadingSuccess.value = true;
+        locateAuto.value = storeOrder.locate
+          ? storeOrder.locate
+          : { name: "Địa chỉ", display_name: "" };
       }
     },
     fail: (error) => {
@@ -213,16 +304,28 @@ onMounted(() => {
 });
 
 watchEffect(() => {
-  locateAuto.value = storeOrder.locate ? storeOrder.locate : "";
-  optionendLocate.value = storeOrder.locatefind ? storeOrder.locatefind : [];
+  optionEndL.value = storeOrder.locatefindEnd ? storeOrder.locatefindEnd : [];
+  optionStartL.value = storeOrder.locatefindStart
+    ? storeOrder.locatefindStart
+    : [];
 });
 
 watch(
   endLocate,
   debounce(async (newValue) => {
     skeletonEndL.value = false;
-    await storeOrder.locateChange(newValue);
+    await storeOrder.locateChange(newValue, null);
     skeletonEndL.value = true;
+  }, 500)
+);
+
+watch(
+  () => locateAuto.value.display_name,
+  debounce(async (newValue) => {
+    console.log(newValue);
+    skeletonStartL.value = false;
+    await storeOrder.locateChange(null, newValue);
+    skeletonStartL.value = true;
   }, 500)
 );
 </script>
