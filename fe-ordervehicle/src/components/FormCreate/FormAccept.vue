@@ -57,7 +57,7 @@
               letter-spacing: 0.4px;
             "
           >
-            32 Samwell Sq, Chevron
+            {{ dataBooking.addressStart }}
           </p>
         </div>
         <div
@@ -90,12 +90,17 @@
               letter-spacing: 0.4px;
             "
           >
-            21b, Karimu Kotun Street, Victoria Island
+            {{ dataBooking.addressEnd }}
           </p>
         </div>
       </div>
       <div>
-        <img src="/iconbike.svg" alt="" />
+        <img
+          v-if="dataBooking.vehicletype === 'Xe máy'"
+          src="/iconbike.svg"
+          alt=""
+        />
+        <img v-if="dataBooking.vehicletype === 'Ôtô'" src="/car.svg" alt="" />
       </div>
     </div>
     <div>
@@ -109,7 +114,7 @@
             line-height: 16px;
           "
         >
-          Cửa hàng
+          Mã giới thiệu nhà hàng
         </p>
         <p
           style="
@@ -120,10 +125,10 @@
             line-height: 24px; /* 171.429% */
           "
         >
-          ABCDEF
+          {{ dataBooking.idrestaurant }}
         </p>
       </div>
-      <div style="margin: 25px 0">
+      <!-- <div style="margin: 25px 0">
         <p
           style="
             color: #77869e;
@@ -146,7 +151,7 @@
         >
           Thẻ
         </p>
-      </div>
+      </div> -->
       <div style="margin: 25px 0">
         <p
           style="
@@ -157,7 +162,7 @@
             line-height: 16px; /* 133.333% */
           "
         >
-          Giá
+          Người đặt xe
         </p>
         <p
           style="
@@ -167,8 +172,15 @@
             font-weight: 400;
             line-height: 24px; /* 171.429% */
           "
+          class="flex items-center font-semibold text-[15px]"
         >
-          150.000VNĐ
+          <Avatar
+            :image="storeUser.userInfor.avatar"
+            class="mr-2"
+            size="large"
+            shape="circle"
+          />
+          {{ storeUser.userInfor.name }}
         </p>
       </div>
     </div>
@@ -184,6 +196,11 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import toast from "@/helper/toast";
+const storeOrder = window.$stores.orderVehicle;
+const storeUser = window.$stores.user;
+const dataBooking = storeOrder.dataBooking;
+</script>
 
 <style scoped></style>

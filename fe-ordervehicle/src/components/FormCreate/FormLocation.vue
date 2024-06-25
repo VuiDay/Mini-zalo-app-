@@ -34,7 +34,7 @@
 
       <div
         v-if="checkStartL"
-        class="z-50 fixed top-0 left-0 right-0 bg-white py-[36px] px-[24px] max-h-[100vh] h-[100vh] flex flex-col"
+        class="z-50 fixed top-0 left-0 right-0 bg-white pt-[50px] pb-[36px] px-[24px] max-h-[100vh] h-[100vh] flex flex-col"
       >
         <div class="relative">
           <input
@@ -106,13 +106,14 @@
       class="flex flex-col mb-[10px]"
       :class="
         checkEndL
-          ? 'fixed top-0 right-0 left-0 bg-white h-[100vh] py-[36px] px-[24px]'
+          ? 'fixed top-0 right-0 left-0 bg-white h-[100vh] pt-[50px] pb-[36px] px-[24px]'
           : ''
       "
     >
       <label
         for="endLocate"
         class="text-[#77869e] text-[13px] not-italic leading-[normal] tracking-[0.239px] font-semibold my-[10px]"
+        :class="checkEndL ? 'hidden' : ''"
         >*Điểm đến</label
       >
       <div class="relative">
@@ -206,17 +207,20 @@
       />
     </div>
     <div style="margin-top: 30px">
-      <!-- <button
-        class="w-[327px] h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
-        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
-      ></button> -->
-      <RouterLink
+      <!-- <RouterLink
         :to="{ name: 'acceptbooking' }"
         class="w-full rounded-[50px] bg-[#2ecb70] text-white h-[56px] flex justify-center items-center"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
       >
         Xác nhận đặt xe
-      </RouterLink>
+      </RouterLink> -->
+      <button
+        class="max-w-[100%] w-full h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
+        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
+        @click="submit"
+      >
+        Xác nhận đặt xe
+      </button>
     </div>
   </div>
   <div v-else class="h-[100vh] w-[100%] flex justify-center items-center">
@@ -234,6 +238,7 @@
 import { ref, onMounted, watchEffect, watch } from "vue";
 import { authorize, getLocation } from "zmp-sdk/apis";
 import { debounce } from "lodash";
+import toast from "@/helper/toast";
 const storeUser = window.$stores.user;
 const storeOrder = window.$stores.orderVehicle;
 const checkVhc = ref(0);
@@ -246,13 +251,21 @@ const optionStartL = ref("");
 const endLocate = ref("");
 const optionEndL = ref("");
 
-const typeVhc = ref("");
+const typeVhc = ref("Ôtô");
 const codeRestau = ref("");
 
 const loadingSuccess = ref(true);
 const checkEndL = ref(false);
 const skeletonEndL = ref(true);
 const skeletonStartL = ref(true);
+
+const data = {
+  iduser: "",
+  idrestaurant: "",
+  addressStart: "",
+  addressEnd: "",
+  vehicletype: "",
+};
 
 const vehicles = [
   {
@@ -271,6 +284,26 @@ const getVehicleIcon = (iconPath) => {
   return `${
     window.location.hostname === "localhost" ? localHost : productionHost
   }${iconPath}`;
+};
+
+const submit = async () => {
+  data.iduser = storeUser.userInfor.idUser;
+  data.idrestaurant = codeRestau.value;
+  data.addressStart = detailStartL.value + ", " + locateAuto.value.display_name;
+  data.addressEnd = endLocate.value;
+  data.vehicletype = typeVhc.value;
+  if (
+    !data.iduser ||
+    !data.idrestaurant ||
+    !data.addressStart ||
+    !data.addressEnd ||
+    !data.vehicletype
+  ) {
+    toast.toastFailed("Không để trống form!");
+    return;
+  }
+  await storeOrder.saveDataBooking(data);
+  window.$router.push("/booking/accept");
 };
 
 onMounted(() => {

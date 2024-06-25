@@ -6,6 +6,7 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
     locate: null,
     locatefindEnd: null,
     locatefindStart: null,
+    dataBooking: [],
     secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {
@@ -47,6 +48,9 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
       } catch (err) {
         console.log(err);
       }
+    },
+    async saveDataBooking(data) {
+      this.dataBooking = data;
     },
   },
 });
