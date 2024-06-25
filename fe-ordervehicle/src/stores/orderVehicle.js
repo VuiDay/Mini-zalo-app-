@@ -21,6 +21,7 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
           `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${res.data.data.latitude}&lon=${res.data.data.longitude}`
         );
         this.locate = locate.data;
+        console.log(this.locate);
         // this.locate = locate.data.display_name;
         // this.nameLocate = locate.data.name;
       } catch (err) {
