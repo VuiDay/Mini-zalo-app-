@@ -11,6 +11,7 @@ export const useUserStore = defineStore("user", {
   actions: {
     async saveAccessTTk(data) {
       this.accessToken = data;
+      console.log(this.accessToken);
     },
 
     async saveInforUser(data) {
