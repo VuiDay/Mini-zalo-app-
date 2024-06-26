@@ -44,6 +44,18 @@ if (window.$router) {
         },
       ],
     },
+    {
+      path: "/wait-driver",
+      name: "wait",
+      component: () => import("@/layouts/layoutWaitBook.vue"),
+      children: [
+        {
+          path: "",
+          name: "waitbooking",
+          component: () => import("@/views/WaitBooking/WaitBookingVhc.vue"),
+        },
+      ],
+    },
   ];
   routes.forEach((r) => {
     const existed = addedRoute.find((r2) => r2.path === r.path);

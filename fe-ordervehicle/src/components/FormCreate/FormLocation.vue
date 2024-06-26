@@ -90,9 +90,9 @@
             "
             class="w-[100%] p-2"
           >
-            <p class="text-[16px] font-semibold flex">
+            <p class="text-[16px] font-semibold flex justify-between">
               <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
-              {{ option.name }}
+              <p class="w-[100%]">{{ option.name }}</p>
             </p>
             <p class="text-[12px] truncate">
               {{ option.display_name }}
@@ -163,9 +163,9 @@
           @click="(endLocate = option.display_name), (checkEndL = false)"
           class="w-[100%] p-2"
         >
-          <p class="text-[16px] font-semibold flex">
+          <p class="text-[16px] font-semibold flex justify-between">
             <img width="15px" class="mr-[10px]" src="/locatered.svg" alt="" />
-            {{ option.name }}
+            <p class="w-[100%]">{{ option.name }}</p>
           </p>
           <p class="text-[12px] truncate">
             {{ option.display_name }}
@@ -294,10 +294,9 @@ const submit = async () => {
   data.vehicletype = typeVhc.value;
   if (
     !data.iduser ||
-    !data.idrestaurant ||
+    !data.vehicletype ||
     !data.addressStart ||
-    !data.addressEnd ||
-    !data.vehicletype
+    !data.addressEnd
   ) {
     toast.toastFailed("Không để trống form!");
     return;
@@ -323,10 +322,10 @@ onMounted(() => {
       if (!data.code) {
         loadingSuccess.value = false;
         await getLocate();
-        loadingSuccess.value = true;
         locateAuto.value = storeOrder.locate
           ? storeOrder.locate
           : { name: "Địa chỉ", display_name: "" };
+        loadingSuccess.value = true;
       }
     },
     fail: (error) => {
@@ -355,7 +354,6 @@ watch(
 watch(
   () => locateAuto.value.display_name,
   debounce(async (newValue) => {
-    console.log(newValue);
     skeletonStartL.value = false;
     await storeOrder.locateChange(null, newValue);
     skeletonStartL.value = true;

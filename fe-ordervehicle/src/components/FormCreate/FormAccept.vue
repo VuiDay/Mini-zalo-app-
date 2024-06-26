@@ -184,23 +184,46 @@
         </p>
       </div>
     </div>
-    <div style="margin-top: 20px">
+    <div style="margin-top: 20px" class="relative">
       <button
         class="max-w-[100%] w-full h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
-        @click=""
+        @click="submitBook"
       >
         Xác nhận
       </button>
+      <p
+        class="absolute top-0 h-[100%] w-[100%] bg-[#2ecb70] rounded-[50px] flex justify-center items-center"
+        v-if="checkLoad"
+      >
+        <ProgressSpinner
+          style="width: 50px; height: 50px"
+          strokeWidth="8"
+          fill="transparent"
+          animationDuration=".5s"
+          aria-label="Custom ProgressSpinner"
+        />
+      </p>
     </div>
   </div>
 </template>
 
 <script setup>
 import toast from "@/helper/toast";
+import { ref } from "vue";
 const storeOrder = window.$stores.orderVehicle;
 const storeUser = window.$stores.user;
 const dataBooking = storeOrder.dataBooking;
+const checkLoad = ref(false);
+
+const submitBook = async () => {
+  checkLoad.value = true;
+  await storeOrder.bookingVehicle(dataBooking);
+  if (storeOrder.statusBooking) {
+    checkLoad.value = false;
+    window.$router.push("/wait-driver");
+  }
+};
 </script>
 
 <style scoped></style>
