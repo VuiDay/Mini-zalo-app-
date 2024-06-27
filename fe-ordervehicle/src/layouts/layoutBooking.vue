@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 36px 24px 0 24px" class="relative">
+  <div style="padding: 36px 24px 36 24px" class="relative">
     <div class="flex items-center">
       <p
         onclick="history.back()"
@@ -16,6 +16,11 @@
       >
         Đặt xe
       </p>
+    </div>
+    <div
+      class="flex justify-center items-center h-[135px] rounded-[30px] overflow-hidden my-[10px]"
+    >
+      <img src="@/assets/image/GoDriver.jpg" alt="" />
     </div>
     <RouterView></RouterView>
   </div>

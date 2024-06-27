@@ -220,6 +220,7 @@ const submitBook = async () => {
   checkLoad.value = true;
   await storeOrder.bookingVehicle(dataBooking);
   if (storeOrder.statusBooking) {
+    toast.toastSuccess("Bạn đã đặt xe thành công!");
     checkLoad.value = false;
     window.$router.push("/wait-driver");
   }

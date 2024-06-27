@@ -6,7 +6,7 @@
         for="startLocate"
       >
         <div class="w-[60%]">
-          <span class="font-semibold">{{ locateAuto.name }}</span>
+          <span class="font-semibold text-black">{{ locateAuto.name }}</span>
           <p class="truncate">
             {{ locateAuto.display_name }}
           </p>

@@ -1,7 +1,9 @@
 <template>
-  <div>1111</div>
+  <WaitBookingAccept></WaitBookingAccept>
 </template>
 
-<script setup></script>
+<script setup>
+import WaitBookingAccept from "@/components/WaitBooking/WaitBookingAccept.vue";
+</script>
 
 <style scoped></style>

@@ -26,6 +26,8 @@ export const useUserStore = defineStore("user", {
         id: "113113131313131",
         idByOA: true,
         isSensitive: false,
+        isDriver: true,
+        isRestaurent: true,
         name: "Cường Nè",
         phone: "84768921323",
       };
