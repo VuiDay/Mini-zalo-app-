@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 36px 24px 36 24px" class="relative">
+  <div style="padding: 36px 24px 36px 24px" class="relative">
     <div class="flex items-center">
       <p
         onclick="history.back()"
