@@ -45,6 +45,7 @@ export const useUserStore = defineStore("user", {
         dataUser.phone ? dataUser : fakeData
       );
       this.userInfor = user.data;
+      console.log(this.userInfor);
     },
   },
 });
