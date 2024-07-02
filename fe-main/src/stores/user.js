@@ -21,7 +21,7 @@ export const useUserStore = defineStore("user", {
     async saveToken(token) {
       const fakeData = {
         avatar:
-          "https://scontent.fvii2-4.fna.fbcdn.net/v/t39.30808-6/438304440_1150209179659623_6594686254167414971_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=bKDw-h0bZP8Q7kNvgFAfP1v&_nc_ht=scontent.fvii2-4.fna&oh=00_AYAAZ_GL7X70ZOjUGs37ueYp7EDaIFA46NxQ8HRdwcJ34g&oe=667826CF",
+          "https://res.cloudinary.com/dn6xdmqbl/image/upload/v1715768576/avatar_user/jluwfckv2ja7w0z04wio.jpg",
         followedOA: false,
         id: "113113131313131",
         idByOA: true,
@@ -47,7 +47,6 @@ export const useUserStore = defineStore("user", {
         dataUser.phone ? dataUser : fakeData
       );
       this.userInfor = user.data;
-      console.log(this.userInfor);
     },
   },
 });

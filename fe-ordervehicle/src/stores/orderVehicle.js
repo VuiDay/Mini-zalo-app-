@@ -8,6 +8,8 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
     locatefindStart: null,
     dataBooking: [],
     statusBooking: null,
+    //driver
+    dataOrderNew: [],
     secretKey: import.meta.env.VITE_SECRET_APP,
   }),
   actions: {
@@ -58,6 +60,18 @@ export const useOrderVehicleStore = defineStore("orderVehicle", {
           data
         );
         this.statusBooking = res.data.success;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    //driver
+    async getOrderNew(id) {
+      try {
+        const res = await axios.get(
+          `https://be-mini-app.minhquancao0.workers.dev/api/driver/delivered-order/${id}`
+        );
+        this.dataOrderNew = res.data;
+        console.log(this.dataOrderNew);
       } catch (err) {
         console.log(err);
       }

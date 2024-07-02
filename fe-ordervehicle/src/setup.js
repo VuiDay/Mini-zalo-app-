@@ -56,11 +56,22 @@ if (window.$router) {
         },
       ],
     },
+    {
+      path: "/driver-order",
+      name: "Driver",
+      component: () => import("./layouts/Driver/layoutDriverMain.vue"),
+      children: [
+        {
+          path: "",
+          name: "DriverOrderVehicle",
+          component: () => import("./views/Driver/OrderUser.vue"),
+        },
+      ],
+    },
   ];
   routes.forEach((r) => {
     const existed = addedRoute.find((r2) => r2.path === r.path);
     if (!existed) {
-      console.log(window.$router, "123");
       window.$router.addRoute(r);
     }
   });
@@ -75,4 +86,15 @@ if (window.$stores) {
   //     role: ["owner", "manage", "staff", "user"]
   // });
   window.$stores.orderVehicle = useOrderVehicleStore();
+
+  window.$router.beforeEach((to, from, next) => {
+    const page = Number(localStorage.getItem("page")) || 0;
+    if (to.path === "/order-vehicle" && page === 1) {
+      next("/driver-order");
+    } else if (to.path === "/driver-order" && page === 0) {
+      next("/order-vehicle");
+    } else {
+      next();
+    }
+  });
 }

@@ -24,6 +24,7 @@
         <img src="/locatered.svg" alt="" />
         <img src="/ellipse.svg" alt="" />
         <img src="/ellipse.svg" alt="" />
+        <img src="/ellipse.svg" alt="" />
         <img src="/dot.svg" alt="" />
       </div>
       <div class="mb-2 flex flex-col items-start" style="gap: 10px; width: 70%">

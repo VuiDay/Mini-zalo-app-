@@ -123,7 +123,7 @@
           v-model="endLocate"
           @click="() => (checkEndL = true)"
           @keyup.enter="checkEndL = false"
-          placeholder="Diểm đến"
+          placeholder="Điểm đến"
           class="bg-[#f0f5f5] py-[15px] pr-[19px] pl-[16px] mt-[5px] rounded-[20px] input-text w-[100%]"
         />
         <img
@@ -150,7 +150,7 @@
         >
           <div class="animate-pulse flex flex-col space-y-4">
             <div class="flex items-center">
-              <div class="rounded-full bg-slate-700 h-4 w-4 mr-2"></div>
+              <div class="rounded-full bg-slate-700 h-4 w-4 mr-2"></div> 
               <div class="flex-1 h-4 bg-slate-700 rounded"></div>
             </div>
             <div class="h-3 bg-slate-700 rounded w-3/4"></div>
@@ -160,7 +160,7 @@
         <div
           v-else
           v-for="(option, index) of optionEndL"
-          @click="(endLocate = option.display_name), (checkEndL = false)"
+          @click="(endLocate = option.display_name)"
           class="w-[100%] p-2"
         >
           <p class="text-[16px] font-semibold flex justify-between">
@@ -207,13 +207,6 @@
       />
     </div>
     <div style="margin-top: 30px">
-      <!-- <RouterLink
-        :to="{ name: 'acceptbooking' }"
-        class="w-full rounded-[50px] bg-[#2ecb70] text-white h-[56px] flex justify-center items-center"
-        style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
-      >
-        Xác nhận đặt xe
-      </RouterLink> -->
       <button
         class="max-w-[100%] w-full h-[56px] rounded-[50px] bg-[#2ecb70] text-white"
         style="box-shadow: 2px 5px 6px 0px rgba(0, 0, 0, 0.25)"
